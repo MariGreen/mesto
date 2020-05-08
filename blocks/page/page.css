@@ -28,6 +28,7 @@
 
 .page {
   min-width: 320px;
+  max-width: 1280px;
   font-family: 'Inter', 'Arial', 'Helvetica', sans-serif;
   background-color: #000;
   margin: 0;
@@ -40,7 +41,7 @@
   text-rendering: optimizeLegibility;
 }
 
-div, p, section, h1, h2, h3, li, ul, .footer, span, .contain {
+/*div, p, section, h1, h2, h3, li, ul, .footer, span, .contain {
 	border: 1px solid red;
-}
+}*/
 

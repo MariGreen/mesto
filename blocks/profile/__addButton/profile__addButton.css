@@ -10,6 +10,13 @@
   background: black;
 }
 
+@media (min-width: 425px) and (max-width: 768px) { 
+  .profile__addButton {
+    width: calc(100% - 6%*2);
+     
+ }
+}
+
 @media screen and (min-width: 769px) {
   .profile__addButton {
     width: 150px;

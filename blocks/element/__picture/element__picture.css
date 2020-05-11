@@ -1,3 +1,4 @@
 .element__picture {
-  width: 282px;  
+  width: auto;
+  height: 282px;
 }

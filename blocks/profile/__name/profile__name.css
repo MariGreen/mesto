@@ -7,6 +7,10 @@
   font-size: 27px;
   line-height: 2.07;
   text-align: center;
+  display: block;
+  max-width: 270px;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .profile__name::after {

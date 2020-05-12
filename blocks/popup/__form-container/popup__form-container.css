@@ -1,4 +1,4 @@
-.popup__edit-form {
+.popup__form-container {
   width: 430px;
   height: 330px;
   background-color: #fff;
@@ -9,8 +9,10 @@
   position: relative;
   flex-direction: column;
   align-items: flex-start;
-  justify-content: space-between;
-  /*padding: 34px 36px 36px;*/
+  justify-content: flex-start;
+  box-sizing: border-box;
+  padding: 34px 36px 36px;
+  /*display: none;*/
   
   
 }

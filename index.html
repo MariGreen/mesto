@@ -72,16 +72,19 @@
     </div>
 
   </div>
-  <!--<div class="popup">
-    <form class="popup__edit-form">
+  <div class="popup">
+    <form class="popup__form-container">
       <img src="./images/popup_closeIcon.svg" alt="" class="popup__closeButton">
       <h5 class="popup__edit-profile">Редактировать профиль</h5>
-      <fieldset class="popup__nameField">
-      </<fieldset>>
-      <fieldset class="popup__vocationField">
-      </<fieldset>>
-      <button class="popup__saveButton">Сохранить</button> 
-    </form>-->
+      <fieldset class="popup__form-item">
+        <input type="text" class="popup__nameField popup__form-item-Field" placeholder="Имя" required ></input>
+      </fieldset>
+      <fieldset class="popup__form-item">
+        <input type="text" class="popup__vocationField popup__form-item-Field" placeholder="О себе" required></input>
+      </fieldset>
+      <button type="submit" class="popup__saveButton">Сохранить</button>
+      <!--<fieldset class="form__handlers"></fieldset>__> 
+    </form>
   </div>
 </body>
 </html>

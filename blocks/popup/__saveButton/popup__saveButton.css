@@ -14,7 +14,7 @@
   color: #FFFFFF;
   width: 100%;
   margin: 48px auto 0px;
-  height: 51px;
+  min-height: 51px;
 }
 
 .popup__saveButton:hover {
@@ -22,3 +22,9 @@
   cursor: pointer;
   transition: all 1s ease;
 }
+
+@media screen and (max-width: 768px) {
+  .popup__saveButton {
+    min-height: 45px;
+    }
+  }

@@ -1,35 +1,40 @@
 @import url(./__avatar/profile__avatar.css);
 @import url(./__info/profile__info.css);
 @import url(./__name/profile__name.css);
+@import url(./__editButton/profile__editButton.css);
+@import url(./__pen/profile__pen.css);
 @import url(./__vocation/profile__vocation.css);
 @import url(./__addButton/profile__addButton.css);
 
 .profile {
   width: calc(100% - 19px*2);
+  max-width: 282px;
   margin: auto;
-  display: flex;
-  flex-direction: column;
-}
+  display: grid;
+  grid-template-columns: 1fr;
+  align-items: center;
+  }
 
-@media (min-width: 768px) and (max-width: 1019px) {
+@media (min-width: 630px) and (max-width: 1019px) {
   .profile {
-    width: calc(100% - 8%*2);
-    flex-direction: row;
-    justify-content: flex-start;
+    /*width: calc(100% - 8%*2);*/
+    max-width: 582px;
+    grid-template-columns: 212px 1fr;
+    justify-items: start;
     align-items: center;
-    position: relative;    
+    margin: 17px auto 34px;
  }
 }
 
 @media screen and (min-width: 1020px) {
   .profile {
-    width: calc(100% - 199px*2);
+    /*width: calc(100% - 199px*2);*/
+    margin: 0 auto;
     max-width: 882px;
-    flex-direction: row;
-    justify-content: flex-start;
+    display: grid;
+    grid-template-columns: 120px 2fr 150px;
+    grid-column-gap: 30px;
+    justify-items: start;
     align-items: center;
-    position: relative;
-    
-     
  }
 }

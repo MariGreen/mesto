@@ -8,11 +8,14 @@
   text-align: center;
   overflow: hidden;
   text-overflow: ellipsis;
-  margin: 0 auto;
+  margin: 0;
+  grid-column: 1 / 3;
+  grid-row: 2 / 3;
 }
 
-@media screen and (min-width: 769px) {
+@media screen and (min-width: 630px) {
   .profile__vocation {
-    margin: 0;
+    font-size: 18px;
+    line-height: 1.22;
   }
 }

@@ -11,17 +11,26 @@
   margin: 0 auto;
 }
 
-@media (min-width: 425px) and (max-width: 1019px) { 
+@media (min-width: 425px) { 
   .header {
-    width: calc(100% - 8%*2);
+    max-width: 582px;
     height: 105px; 
  }
 }
 
+@media (max-width: 630px) { 
+  .header {
+    max-width: 582px;
+    height: 105px; 
+ }
+}
+
+
+
 @media screen and (min-width: 1020px) {
   .header {
     width: calc(100% - 199px*2);
-    max-width: 882px;
+    min-width: 882px;
     height: 119px;
  }
 }

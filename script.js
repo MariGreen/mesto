@@ -4,7 +4,7 @@ document.querySelector('.popup__closeButton').addEventListener('click', function
 
   })
 
-document.querySelector('.profile__addButton').addEventListener('click', function() {
+document.querySelector('.profile__editButton').addEventListener('click', function() {
   let start = document.querySelector('.popup');
   start.classList.add('popup_opened');
   const profileName = document.querySelector('.profile__name');

@@ -5,6 +5,7 @@
   font-display: swap;
   src: url('../../fonts/Inter-Black.woff2') format("woff2"),
        url('../../fonts/Inter-Black.woff') format("woff");
+}
 
 @font-face {
   font-family: 'Inter';

@@ -23,12 +23,7 @@
 
 @media screen and (min-width: 630px) {
   .profile__editButton {  
-      /*margin: 0;
-      align-items: flex-start;
-     */ 
     width: 24px;
     height: 24px;
-    align-self: end;
-
   }
 }

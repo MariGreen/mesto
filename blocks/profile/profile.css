@@ -5,6 +5,7 @@
 @import url(./__pen/profile__pen.css);
 @import url(./__vocation/profile__vocation.css);
 @import url(./__addButton/profile__addButton.css);
+@import url(./__plus/profile__plus.css);
 
 .profile {
   width: calc(100% - 19px*2);
@@ -15,9 +16,8 @@
   align-items: center;
   }
 
-@media (min-width: 630px) and (max-width: 1019px) {
+@media screen and (min-width: 630px) {
   .profile {
-    /*width: calc(100% - 8%*2);*/
     max-width: 582px;
     grid-template-columns: 212px 1fr;
     justify-items: start;
@@ -28,13 +28,9 @@
 
 @media screen and (min-width: 1020px) {
   .profile {
-    /*width: calc(100% - 199px*2);*/
     margin: 0 auto;
     max-width: 882px;
-    display: grid;
     grid-template-columns: 120px 2fr 150px;
-    grid-column-gap: 30px;
-    justify-items: start;
-    align-items: center;
+    grid-column-gap: 30px;    
  }
 }

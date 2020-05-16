@@ -11,21 +11,13 @@
   margin: 0 auto;
 }
 
+
 @media (min-width: 425px) { 
   .header {
     max-width: 582px;
     height: 105px; 
  }
 }
-
-@media (max-width: 630px) { 
-  .header {
-    max-width: 582px;
-    height: 105px; 
- }
-}
-
-
 
 @media screen and (min-width: 1020px) {
   .header {

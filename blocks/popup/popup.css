@@ -3,6 +3,8 @@
 @import url(../popup/__closeButton/popup__closeButton.css);
 @import url(../popup/__form-item/popup__form-item.css);
 @import url(../popup/__form-item-Field/popup__form-item-Field.css);
+@import url(../popup/__nameField/popup__nameField.css);
+@import url(../popup/__vocationField/popup__vocationField.css);
 @import url(../popup/__saveButton/popup__saveButton.css);
 
 

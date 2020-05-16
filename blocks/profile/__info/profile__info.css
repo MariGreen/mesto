@@ -22,10 +22,5 @@
 @media screen and (min-width: 1019px) {
   .profile__info {  
     margin: -18px 0px 0px;
-    grid-template-columns: 1fr 24px;
-    grid-template-rows: 1fr max-content;
-    grid-column-gap: 17px;
-    grid-row-gap: 16px;
-    justify-items: start;
   }
 }

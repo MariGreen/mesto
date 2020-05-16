@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Фотографии красивых мест. С лайками.">
+    <meta name="description" content="Фотографии красивых мест России. С лайками.">
     <meta name="keywords" content="html, css, javascript">
     <meta name="author" content="Яндекс.Практикум">
     <link rel="stylesheet" href="./styles/index.css">
@@ -24,14 +24,14 @@
         
         <img src="images/profile_photo1.jpg" alt="фото пользователя" class="profile__avatar">
         <div class="profile__info">
-          <h4 class="profile__name">Жан Кокто</h4>
+          <h1 class="profile__name">Жан Кокто</h1>
           <button class="profile__editButton">
-            <img src="images/pen.svg" alt="pen" class="profile__pen">
+            <img src="images/profile_pen.svg" alt="pen" class="profile__pen">
           </button>
           <p class="profile__vocation">Французский писатель</p> 
         </div>
         <button class="profile__addButton">
-          <img src="images/plus.svg" alt="plus" class="profile__plus">
+          <img src="images/profile_plus.svg" alt="plus" class="profile__plus">
         </button>
       </section>
 
@@ -77,13 +77,13 @@
   </div>
   <div class="popup">
     <form class="popup__form-container">
-      <img src="./images/popup_closeIcon.svg" alt="" class="popup__closeButton">
+      <img src="./images/popup_closeIcon.svg" alt="close" class="popup__closeButton">
       <h5 class="popup__edit-profile">Редактировать профиль</h5>
       <fieldset class="popup__form-item">
-        <input type="text" class="popup__nameField popup__form-item-Field" placeholder="Имя" value='' required></input>
+        <input type="text" class="popup__nameField popup__form-item-Field" placeholder="Имя" value='' required>
       </fieldset>
       <fieldset class="popup__form-item">
-        <input type="text" class="popup__vocationField popup__form-item-Field" placeholder="О себе" value='' required></input>
+        <input type="text" class="popup__vocationField popup__form-item-Field" placeholder="О себе" value='' required>
       </fieldset>
       <button type="submit" class="popup__saveButton">Сохранить</button>
       <!--<fieldset class="form__handlers"></fieldset>--> 

@@ -31,6 +31,6 @@
     margin: 0 auto;
     max-width: 882px;
     grid-template-columns: 120px 2fr 150px;
-    grid-column-gap: 30px;    
+    grid-column-gap: 30px;
  }
 }

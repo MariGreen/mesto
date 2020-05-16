@@ -1,0 +1,28 @@
+@import url(../header/__logo/header__logo.css);
+@import url(../header/__line/header__line.css);
+
+.header {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  height: 84px;
+  margin: 0 auto;
+}
+
+
+@media (min-width: 425px) { 
+  .header {
+    max-width: 582px;
+    height: 105px; 
+ }
+}
+
+@media screen and (min-width: 1020px) {
+  .header {
+    width: calc(100% - 199px*2);
+    min-width: 882px;
+    height: 119px;
+ }
+}

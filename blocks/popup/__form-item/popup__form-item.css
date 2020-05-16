@@ -1,0 +1,26 @@
+.popup__form-item {
+  border: 0px;
+  width: 100%;
+  height: 27.5px;
+  margin: 0 auto;
+  padding: 1px;
+  box-sizing: border-box;
+  border-bottom: 1px solid #bcbcc4;
+  background-color: transparent;
+  text-align: start;
+  font-family: Inter;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 1.21;
+  color: #000000;
+}
+
+.popup__form-item:first-of-type {
+  margin-bottom: 30px;
+}
+
+.popup__form-item:focus {
+  outline: none;
+  border: 1px solid rebeccapurple;
+}

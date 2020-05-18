@@ -1,11 +1,11 @@
 @import url(../popup/__edit-profile/popup__edit-profile.css);
 @import url(../popup/__form-container/popup__form-container.css);
-@import url(../popup/__closeButton/popup__closeButton.css);
+@import url(../popup/__close-button/popup__close-button.css);
 @import url(../popup/__form-item/popup__form-item.css);
-@import url(../popup/__form-item-Field/popup__form-item-Field.css);
-@import url(../popup/__nameField/popup__nameField.css);
-@import url(../popup/__vocationField/popup__vocationField.css);
-@import url(../popup/__saveButton/popup__saveButton.css);
+@import url(../popup/__form-item-field/popup__form-item-field.css);
+@import url(../popup/__form-item-field/__name/popup__form-item-field_name.css);
+@import url(../popup/__form-item-field/__vocation/popup__form-item-field_vocation.css);
+@import url(../popup/__save-button/popup__save-button.css);
 
 
 .popup {
@@ -13,7 +13,6 @@
   height: 100%;
   position: fixed;
   background-color: rgba(0, 0, 0, 0.5);
-  position: fixed;
   top: 0;
   left: 0;
   right: 0;
@@ -24,3 +23,4 @@
   margin: auto;
   display: none;
 }
+

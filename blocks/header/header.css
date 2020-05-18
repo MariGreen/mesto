@@ -7,15 +7,15 @@
   flex-direction: column;
   justify-content: flex-start;
   align-items: flex-start;
-  height: 84px;
   margin: 0 auto;
-}
+  border-bottom:1px solid rgba(84, 84, 84, 0.6);
+  }
 
 
 @media screen and (min-width: 425px) { 
   .header {
     max-width: 582px;
-    height: 105px; 
+    border-bottom:1px solid rgba(84, 84, 84, 0.7);
  }
 }
 
@@ -23,6 +23,6 @@
   .header {
     width: calc(100% - 199px*2);
     min-width: 882px;
-    height: 119px;
+    
  }
 }

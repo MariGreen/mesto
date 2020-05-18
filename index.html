@@ -14,81 +14,89 @@
   <div class="page">
     
     <header class="header">
-      <img src="./images/logo.svg" alt="логотип проекта" class="header_logo">
-      <div class="header__line"></div>
+      <img src="./images/logo.svg" alt="логотип проекта" class="header__logo">
     </header>
 
     <main class="content">
       
-      <section class="profile">
-        
+      <section class="profile"> 
         <img src="images/profile_photo1.jpg" alt="фото пользователя" class="profile__avatar">
         <div class="profile__info">
           <h1 class="profile__name">Жан Кокто</h1>
-          <button class="profile__editButton">
-            <img src="images/profile_pen.svg" alt="pen" class="profile__pen">
+          <button type="button" class="profile__edit-button">
+            <img src="images/profile_pen.svg" alt="редактировать" class="profile__pen">
           </button>
           <p class="profile__vocation">Французский писатель</p> 
         </div>
-        <button class="profile__addButton">
-          <img src="images/profile_plus.svg" alt="plus" class="profile__plus">
+        <button type="button" class="profile__add-button">
+          <img src="images/profile_plus.svg" alt="добавить" class="profile__plus">
         </button>
       </section>
 
       <section class="elements">
         <div class="element">
           <img src="./images/elements_pavlovsk.jpg" alt="Павловск" class="element__picture">
-          <h5 class="element__place">Павловск</h5>
-          <button class="element__like"></button>
+          <div class="element__data">
+            <h5 class="element__place">Павловск</h5>
+            <button type="submit" class="element__like"></button>
+        </div>
         </div>
         <div class="element">
           <img src="./images/elements_sudak.jpg" alt="Судак" class="element__picture">
-          <h5 class="element__place">Судак</h5>
-          <button class="element__like"></button>
+          <div class="element__data">
+            <h5 class="element__place">Судак</h5>
+            <button type="submit" class="element__like"></button>
+        </div>
         </div>
         <div class="element">
           <img src="./images/elements_tula.jpg" alt="Тула" class="element__picture">
-          <h5 class="element__place">Тула</h5>
-          <button class="element__like"></button>
+          <div class="element__data">
+            <h5 class="element__place">Тула</h5>
+            <button type="submit" class="element__like"></button>
+        </div>
         </div>
         <div class="element">
           <img src="./images/elements_vyborg.jpg" alt="Выборг" class="element__picture">
-          <h5 class="element__place">Выборг</h5>
-          <button class="element__like"></button>
+          <div class="element__data">
+            <h5 class="element__place">Выборг</h5>
+            <button type="submit" class="element__like"></button>
+        </div>
         </div>
         <div class="element">
           <img src="./images/elements_Mikli.jpg" alt="Карелия" class="element__picture">
-          <h5 class="element__place">Микли</h5>
-          <button class="element__like"></button>
+            <div class="element__data">
+            <h5 class="element__place">Микли</h5>
+          <button type="submit" class="element__like"></button>
+        </div>
         </div>
         <div class="element">
           <img src="./images/elements_baikal.jpg" alt="Байкал" class="element__picture">
-          <h5 class="element__place">Байкал</h5>
-          <button class="element__like"></button>
+            <div class="element__data">
+            <h5 class="element__place">Байкал</h5>
+          <button type="submit" class="element__like"></button>
+        </div>
         </div>
       </section>
 
     </main>
 
-    <div class="footer">
+    <footer class="footer">
       <p class="footer__copyright">&copy; 2020 Mesto Russia</p>
-    </div>
+    </footer>
 
   </div>
   <div class="popup">
-    <form class="popup__form-container">
-      <img src="./images/popup_closeIcon.svg" alt="close" class="popup__closeButton">
+    <form name= "change-user" action="#" method="POST" class="popup__form-container">
+      <button type="button" class="popup__close-button"></button>
       <h5 class="popup__edit-profile">Редактировать профиль</h5>
       <fieldset class="popup__form-item">
-        <input type="text" class="popup__nameField popup__form-item-Field" placeholder="Имя" value='' required>
+        <input type="text" name="name" class="popup__form-item-field popup__form-item-field_name" placeholder="Имя" value='' required>
+        <input type="text" name="vocation" class="popup__form-item-field popup__form-item-field_vocation" placeholder="О себе" value='' required>
       </fieldset>
-      <fieldset class="popup__form-item">
-        <input type="text" class="popup__vocationField popup__form-item-Field" placeholder="О себе" value='' required>
-      </fieldset>
-      <button type="submit" class="popup__saveButton">Сохранить</button>
+      <button type="submit" class="popup__save-button">Сохранить</button>
       <!--<fieldset class="form__handlers"></fieldset>--> 
     </form>
   </div>
-  <script src="script.js"></script>
+  <script src="./js/script.js"></script>
 </body>
 </html>

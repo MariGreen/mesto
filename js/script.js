@@ -4,21 +4,21 @@ const popupProfileName = document.querySelector('.popup__form-item-field_name');
 const profileVocation = document.querySelector('.profile__vocation');
 const popupProfileVocation = document.querySelector('.popup__form-item-field_vocation');
 const formElement = document.querySelector('.popup__form-container');
-
-
-function popupVisible () {
-  popup.classList.add('popup_opened');  
-}
-
-function popupUnseen () {
-  popup.classList.remove('popup_opened');  
-}
-
+const editUser = document.querySelector('.profile__edit-button');
+const changeMyMind = document.querySelector('.popup__close-button');
 
 function getName () {
   popupProfileName.value = profileName.textContent;  
-  popupProfileVocation.value = profileVocation.textContent;
-  popupVisible();
+  popupProfileVocation.value = profileVocation.textContent;  
+}
+
+function openClose () {
+  if (popup.classList.contains('popup_opened')) { 
+    popup.classList.remove('popup_opened');
+  } else {
+    popup.classList.add('popup_opened');
+    getName ();
+  }
 }
 
 // Обработчик «отправки» формы, хотя пока
@@ -34,11 +34,11 @@ function formSubmitHandler (evt) {
   // Вставьте новые значения с помощью textContent
   profileVocation.textContent = newJob;
   profileName.textContent = newName;
-  popupUnseen();
+  openClose();
 }
 
-document.querySelector('.popup__close-button').addEventListener('click', popupUnseen);
-document.querySelector('.profile__edit-button').addEventListener('click', getName);
+changeMyMind.addEventListener('click', openClose);
+editUser.addEventListener('click', openClose);
 
 // Прикрепляем обработчик к форме:
 // он будет следить за событием “submit” - «отправка»

@@ -22,7 +22,6 @@
   .profile__add-button {
     width: 150px;
     margin: 0;
-    border: 2px solid #FFFFFF;
-    border-radius: 2px;
+    border: 2px solid #FFFFFF;    
  }
 }

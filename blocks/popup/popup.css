@@ -2,9 +2,9 @@
 @import url(../popup/__form-container/popup__form-container.css);
 @import url(../popup/__close-button/popup__close-button.css);
 @import url(../popup/__form-item/popup__form-item.css);
-@import url(../popup/__form-item-field/popup__form-item-field.css);
-@import url(../popup/__form-item-field/__name/popup__form-item-field_name.css);
-@import url(../popup/__form-item-field/__vocation/popup__form-item-field_vocation.css);
+@import url(../popup/__form-item-ffield/popup__form-item-field.css);
+@import url(../popup/__form-item-ffield/__name/popup__form-item-field_name.css);
+@import url(../popup/__form-item-ffield/__vocation/popup__form-item-field_vocation.css);
 @import url(../popup/__save-button/popup__save-button.css);
 
 

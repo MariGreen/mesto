@@ -34,7 +34,7 @@
       </section>
 
       <section class="elements">
-        <div class="element">
+        <!--<div class="element">
           <button type="submit" class="element__trash"></button>
           <img src="./images/elements_pavlovsk.jpg" alt="Павловск" class="element__picture">
           <div class="element__data">
@@ -81,7 +81,16 @@
             <h5 class="element__place">Байкал</h5>
           <button type="submit" class="element__like"></button>
         </div>
-        </div>
+        </div>-->
+        <template class="element_template">
+          <div class="element">
+            <button type="submit" class="element__trash"></button>
+            <img src="" alt="" class="element__picture">
+              <div class="element__data">
+              <h5 class="element__place"></h5>
+            <button type="submit" class="element__like"></button>
+          </div>
+        </template>
       </section>
 
     </main>
@@ -92,18 +101,18 @@
 
   </div>
   <div class="popup">
-    <form name= "change-user" action="#" method="POST" class="popup__form-container">
+    <!--<form name= "change-user" action="#" method="POST" class="popup__form-container">
       <button type="button" class="popup__close-button"></button>
-      <h5 class="popup__edit-profile">Заголовок поп-апа</h5>
+      <h5 class="popup__title">Заголовок поп-апа</h5>
       <fieldset class="popup__form-item">
         <input type="text" name="name" class="popup__form-item-field popup__form-item-field_name" placeholder="" value='' required>
         <input type="text" name="vocation" class="popup__form-item-field popup__form-item-field_vocation" placeholder="" value='' required>
       </fieldset>
       <button type="submit" class="popup__save-button">Кнопка отправки</button>
-      <!--<fieldset class="form__handlers"></fieldset>--> 
-    </form>
+      <fieldset class="form__handlers"></fieldset>
+    </form>-->
 
-    <!--<form name= "change-user" action="#" method="POST" class="popup__form-container">
+    <form name= "change-user" action="#" method="POST" class="popup__form-container">
       <button type="button" class="popup__close-button"></button>
       <h5 class="popup__edit-profile">Редактировать профиль</h5>
       <fieldset class="popup__form-item">
@@ -111,30 +120,22 @@
         <input type="text" name="vocation" class="popup__form-item-field popup__form-item-field_vocation" placeholder="О себе" value='' required>
       </fieldset>
       <button type="submit" class="popup__save-button">Сохранить</button>
-      <fieldset class="form__handlers"></fieldset> 
     </form>
+
+    
 
     <form name= "new-card" action="#" method="POST" class="popup__form-container">
       <button type="button" class="popup__close-button"></button>
-      <h5 class="popup__edit-card">Новое место</h5>
+      <h5 class="popup__title">Новое место</h5>
       <fieldset class="popup__form-item">
         <input type="text" name="place" class="popup__form-item-field popup__form-item-field_place" placeholder="Название" value='' required>
         <input type="text" name="link" class="popup__form-item-field popup__form-item-field_link" placeholder="Ссылка на картинку" value='' required>
       </fieldset>
-      <button type="submit" class="popup__save-button">Создать</button>
-      <fieldset class="form__handlers"></fieldset> 
-    </form>-->
+      <button type="submit" class="popup__save-button">Создать</button>      
+    </form>
 
   </div>
-  <template>
-    <div class="element">
-      <button type="submit" class="element__trash"></button>
-      <img src="" alt="" class="element__picture">
-        <div class="element__data">
-        <h5 class="element__place"></h5>
-      <button type="submit" class="element__like"></button>
-    </div>
-  </template>
+ 
   <script src="./js/script.js"></script>
 </body>
 </html>

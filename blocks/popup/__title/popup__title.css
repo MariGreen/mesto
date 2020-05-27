@@ -1,4 +1,4 @@
-.popup__edit-profile {
+.popup__title {
   color: #000;
   font-family: 'Inter', 'Arial', 'Helvetica', sans-serif;
   font-style: normal;
@@ -9,7 +9,7 @@
 }
 
 @media screen and (max-width: 450px) {
-  .popup__edit-profile {
+  .popup__title {
     font-size: 22px;
   }
   }

@@ -84,6 +84,7 @@ function openClose (evt) {
     }
   }
 
+  
 function saveProfile () {
   // Получите значение полей из свойства value
   const newName = popupProfileName.value;
@@ -118,6 +119,21 @@ function addCard () {
   newCardPlace.textContent = popupProfileName.value;
 }
 
+//обработка клика по карточке!
+
+elements.addEventListener("click", (evt) => {
+  const list_item = evt.target.closest(".element");
+  const likeButton = list_item.querySelector('.element__like');
+  if (evt.target.classList.contains('element__trash')) {
+      list_item.remove();  
+  } else if (evt.target.classList.contains('element__like')) {
+    likeButton.classList.toggle('element__like_black');
+  } else {
+    //вызов превью
+  }  
+});
+
+
 // Обработчик «отправки» формы, хотя пока
 // она никуда отправляться не будет
 function formSubmitHandler (evt) {
@@ -141,9 +157,6 @@ function formSubmitHandler (evt) {
 
 closeButton.addEventListener('click', openClose);
 
-//testProfileListener.addEventListener('click', function(evt) {
-//  openClose(evt);
-//});
 
 //редактирование профиля
 editUser.addEventListener('click', function(evt) {

@@ -1,4 +1,5 @@
-const popup = document.querySelector('.popup');
+const popupChangeUser = document.querySelector('.popup_change-user');
+const popupAddPlace = document.querySelector('.popup_add-place');
 const popupPreview = document.querySelector('.popup__preview');
 const profileName = document.querySelector('.profile__name');
 const popupProfileName = document.querySelector('.popup__form-item-field_name');
@@ -6,7 +7,7 @@ const profileVocation = document.querySelector('.profile__vocation');
 const popupProfileVocation = document.querySelector('.popup__form-item-field_vocation');
 const formElement = document.querySelector('.popup__form-container');
 const editUser = document.querySelector('.profile__edit-button');
-const closeButton = document.querySelector('.popup__close-button');
+//const closeButton = document.querySelector('.popup__close-button');
 
 
 const popupHeader = document.querySelector('.popup__edit-profile');
@@ -52,36 +53,24 @@ function getName () {
 
 
 
-
-function profileTemlate () {
-  popupProfileName.placeholder = 'Имя';  
-  popupProfileVocation.placeholder = 'О себе';
-  popupHeader.textContent = 'Редактировать профиль';
-  saveButton.textContent = 'Сохранить';
-}
-
-function cardTemlate () {
-  popupProfileName.value = '';
-  popupProfileName.placeholder = 'Название';  
-  popupProfileVocation.value = '';
-  popupProfileVocation.placeholder = 'Ссылка';
-  popupHeader.textContent = 'Новое место';
-  saveButton.textContent = 'Создать';
-}
-
 function openClose (evt) {
- //console.log(popup.classList);
-    if (popup.classList.contains('popup_opened')) { 
-      popup.classList.remove('popup_opened');
+
+    if (popupChangeUser.classList.contains('popup_opened')) { 
+      popupChangeUser.classList.remove('popup_opened');
+    } else if (popupAddPlace.classList.contains('popup_opened')) {
+      console.log(popupAddPlace.classList);
+      popupAddPlace.classList.remove('popup_opened');
+
     } else {
       if (evt.target.classList.contains('profile__edit-button')) {
-      // заполняем попап шаблоном профиля
-      profileTemlate (); 
+       popupChangeUser.classList.add('popup_opened');
+       const closeButton = popupChangeUser.querySelector('.popup__close-button');
+       console.log(closeButton);
       } else if (evt.target.classList.contains('profile__add-button')) {
-        // заполняем попап шаблоном карточки
-        cardTemlate ();
+
+        popupAddPlace.classList.add('popup_opened');
       }      
-      popup.classList.add('popup_opened');
+      //popup.classList.add('popup_opened');
     }
   }
 
@@ -110,7 +99,7 @@ function render () {
     elementPlace.textContent = item.name;
     elementPicture.alt = item.name;
     elements.append(element);
-    console.log(elementPicture.alt);
+    //console.log(elementPicture.alt);
   })
 }
 render ();
@@ -179,7 +168,7 @@ function formSubmitHandler (evt) {
   
 }
 
-closeButton.addEventListener('click', openClose);
+//closeButton.addEventListener('click', openClose);
 
 
 

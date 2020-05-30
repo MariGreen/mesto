@@ -1,4 +1,5 @@
 const popup = document.querySelector('.popup');
+const popupPreview = document.querySelector('.popup__preview');
 const profileName = document.querySelector('.profile__name');
 const popupProfileName = document.querySelector('.popup__form-item-field_name');
 const profileVocation = document.querySelector('.profile__vocation');
@@ -69,7 +70,7 @@ function cardTemlate () {
 }
 
 function openClose (evt) {
- //if ((evt.target === editUser) || (evt.target === newCard) || (evt.target === changeMyMind) || (evt.target === saveButton)) {
+ //console.log(popup.classList);
     if (popup.classList.contains('popup_opened')) { 
       popup.classList.remove('popup_opened');
     } else {
@@ -84,6 +85,11 @@ function openClose (evt) {
     }
   }
 
+function closeImage(){
+  //console.log(popupPreview.classList);  
+  popupPreview.classList.remove('popup__preview_opened');
+    
+  }
   
 function saveProfile () {
   // Получите значение полей из свойства value
@@ -102,7 +108,9 @@ function render () {
     const elementPlace = element.querySelector('.element__place');
     elementPicture.src = item.link;
     elementPlace.textContent = item.name;
+    elementPicture.alt = item.name;
     elements.append(element);
+    console.log(elementPicture.alt);
   })
 }
 render ();
@@ -117,6 +125,8 @@ function addCard () {
   const newCardPlace = document.querySelector('.element__place');
   newCardPicture.src = popupProfileVocation.value;
   newCardPlace.textContent = popupProfileName.value;
+  newCardPicture.alt = popupProfileName.value;
+  
 }
 
 //обработка клика по карточке!
@@ -128,8 +138,22 @@ elements.addEventListener("click", (evt) => {
       list_item.remove();  
   } else if (evt.target.classList.contains('element__like')) {
     likeButton.classList.toggle('element__like_black');
-  } else {
+  } else if (evt.target.classList.contains('element__picture')) {
     //вызов превью
+    popupPreview.classList.toggle('popup__preview_opened');
+    const closeButtonImg = popupPreview.querySelector('.popup__close-button');
+
+    closeButtonImg.addEventListener('click', closeImage);
+    const cardPicture = list_item.querySelector('.element__picture');
+    const popupPicture = document.querySelector('.popup__image');
+    popupPicture.src = cardPicture.src;
+    //const cardCaption = list_item.textContent;
+    const popupCaption = document.querySelector('.popup__image-caption');
+    popupCaption.textContent = list_item.textContent;
+    popupCaption.alt = list_item.textContent;
+
+
+    console.log(popupCaption.alt);
   }  
 });
 
@@ -156,6 +180,7 @@ function formSubmitHandler (evt) {
 }
 
 closeButton.addEventListener('click', openClose);
+
 
 
 //редактирование профиля

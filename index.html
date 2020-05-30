@@ -100,6 +100,8 @@
     </footer>
 
   </div>
+
+  <section class="popups">
   <div class="popup">
     <form name= "change-user" action="#" method="POST" class="popup__form-container">
       <button type="button" class="popup__close-button"></button>
@@ -109,7 +111,6 @@
         <input type="text" name="vocation" class="popup__form-item-field popup__form-item-field_vocation" placeholder="" value='' required>
       </fieldset>
       <button type="submit" class="popup__save-button">Кнопка отправки</button>
-      <!--<fieldset class="form__handlers"></fieldset>--> 
     </form>
 
     <!--<form name= "change-user" action="#" method="POST" class="popup__form-container">
@@ -133,8 +134,19 @@
       <button type="submit" class="popup__save-button">Создать</button>
       <fieldset class="form__handlers"></fieldset> 
     </form>-->
-
   </div>
+
+  <div class="popup__preview">
+    <div class="popup__image-container">
+      <button type="button" class="popup__close-button"></button>
+      <img class="popup__image" src="" alt="">
+      <p class="popup__image-caption"></p>
+    </div>
+  </div>
+
+  </section>
+
+
   <script src="./js/script.js"></script>
 </body>
 </html>

@@ -3,6 +3,7 @@
   height: 27.5px;
   border-bottom: 1px solid rgba(0, 0, 0, 0.2);
   margin-bottom: 48px;
+  box-shadow: none;
 }
 
 .popup__form-item-field:first-of-type {

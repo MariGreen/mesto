@@ -31,7 +31,12 @@
         </button>
       </section>
 
+<<<<<<< HEAD
       <section class="elements">        
+=======
+      <section class="elements">
+        
+>>>>>>> 89d9ad34704447728dca10ed5ab680c5de1de975
         <template class="element_template">
           <div class="element">
             <button type="submit" class="element__trash"></button>
@@ -41,6 +46,7 @@
             <button type="submit" class="element__like element__like_black"></button>
           </div>
         </template>
+
       </section>
 
     </main>
@@ -52,8 +58,8 @@
   </div>
 
   <section class="popups">
-  <div class="popup">
-    <form name= "change-user" action="#" method="POST" class="popup__form-container">
+  <div class="popup popup_change-user">
+    <!--<form name= "change-user" action="#" method="POST" class="popup__form-container">
       <button type="button" class="popup__close-button"></button>
       <h5 class="popup__edit-profile">Заголовок поп-апа</h5>
       <fieldset class="popup__form-item">
@@ -61,7 +67,33 @@
         <input type="text" name="vocation" class="popup__form-item-field popup__form-item-field_vocation" placeholder="" value='' required>
       </fieldset>
       <button type="submit" class="popup__save-button">Кнопка отправки</button>
+<<<<<<< HEAD
     </form>    
+=======
+    </form>-->
+
+    <form name = "change-user" action="#" method="POST" class="popup__form-container">
+      <button type="button" class="popup__close-button"></button>
+      <h5 class="popup__title">Редактировать профиль</h5>
+      <fieldset class="popup__form-item">
+        <input type="text" name="name" class="popup__form-item-field popup__form-item-field_name" placeholder="Имя" value='' required>
+        <input type="text" name="vocation" class="popup__form-item-field popup__form-item-field_vocation" placeholder="О себе" value='' required>
+      </fieldset>
+      <button type="submit" class="popup__save-button">Сохранить</button>
+    </form>
+  </div>
+
+  <div class="popup popup_add-place">
+    <form name = "new-card" action="#" method="POST" class="popup__form-container">
+      <button type ="button" class="popup__close-button"></button>
+      <h5 class="popup__title">Новое место</h5>
+      <fieldset class="popup__form-item">
+        <input type="text" name="place" class="popup__form-item-field popup__form-item-field_place" placeholder="Название" value='' required>
+        <input type="text" name="link" class="popup__form-item-field popup__form-item-field_link" placeholder="Ссылка на картинку" value='' required>
+      </fieldset>
+      <button type="submit" class="popup__save-button">Создать</button>
+    </form>
+>>>>>>> 89d9ad34704447728dca10ed5ab680c5de1de975
   </div>
 
   <div class="popup__preview">

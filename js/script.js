@@ -1,4 +1,5 @@
-const popup = document.querySelector('.popup');
+const popupChangeUser = document.querySelector('.popup_change-user');
+const popupAddPlace = document.querySelector('.popup_add-place');
 const popupPreview = document.querySelector('.popup__preview');
 const profileName = document.querySelector('.profile__name');
 const popupProfileName = document.querySelector('.popup__form-item-field_name');
@@ -6,7 +7,7 @@ const profileVocation = document.querySelector('.profile__vocation');
 const popupProfileVocation = document.querySelector('.popup__form-item-field_vocation');
 const formElement = document.querySelector('.popup__form-container');
 const editUser = document.querySelector('.profile__edit-button');
-const closeButton = document.querySelector('.popup__close-button');
+//const closeButton = document.querySelector('.popup__close-button');
 
 
 const popupHeader = document.querySelector('.popup__edit-profile');
@@ -52,7 +53,9 @@ function getNameAndVocation () {
 
 
 
+function openClose (evt) {
 
+<<<<<<< HEAD
 function fillProfileTemlate () {
   popupProfileName.placeholder = 'Имя';  
   popupProfileVocation.placeholder = 'О себе';
@@ -81,6 +84,25 @@ function openClose (evt) {
       fillCardTemlate ();
     }      
     popup.classList.add('popup_opened');
+=======
+    if (popupChangeUser.classList.contains('popup_opened')) { 
+      popupChangeUser.classList.remove('popup_opened');
+    } else if (popupAddPlace.classList.contains('popup_opened')) {
+      console.log(popupAddPlace.classList);
+      popupAddPlace.classList.remove('popup_opened');
+
+    } else {
+      if (evt.target.classList.contains('profile__edit-button')) {
+       popupChangeUser.classList.add('popup_opened');
+       const closeButton = popupChangeUser.querySelector('.popup__close-button');
+       console.log(closeButton);
+      } else if (evt.target.classList.contains('profile__add-button')) {
+
+        popupAddPlace.classList.add('popup_opened');
+      }      
+      //popup.classList.add('popup_opened');
+    }
+>>>>>>> 89d9ad34704447728dca10ed5ab680c5de1de975
   }
 }
 
@@ -107,7 +129,7 @@ function render () {
     elementPlace.textContent = item.name;
     elementPicture.alt = item.name;
     elements.append(element);
-    console.log(elementPicture.alt);
+    //console.log(elementPicture.alt);
   })
 }
 render ();
@@ -173,7 +195,7 @@ function formSubmitHandler (evt) {
   
 }
 
-closeButton.addEventListener('click', openClose);
+//closeButton.addEventListener('click', openClose);
 
 
 //редактирование профиля

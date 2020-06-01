@@ -1,16 +1,19 @@
 @import url(../element/__picture/element__picture.css);
+@import url(../element/__trash/element__trash.css);
+@import url(../element/__data/element__data.css);
 @import url(../element/__place/element__place.css);
 @import url(../element/__like/element__like.css);
+@import url(../element/__like/_black/element__like_black.css);
+
 
 .element {
   width: 282px;
-  height: 361px;
   background-color: #fff;
   background-position: center;
   background-size: cover;
   border-radius: 10px;
-  position: relative;
   margin: 0 auto;
+  position: relative;
   overflow: hidden;
 }
 

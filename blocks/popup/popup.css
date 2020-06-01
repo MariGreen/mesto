@@ -1,11 +1,15 @@
 @import url(../popup/__edit-profile/popup__edit-profile.css);
 @import url(../popup/__form-container/popup__form-container.css);
-@import url(../popup/__closeButton/popup__closeButton.css);
+@import url(../popup/__close-button/popup__close-button.css);
 @import url(../popup/__form-item/popup__form-item.css);
-@import url(../popup/__form-item-Field/popup__form-item-Field.css);
-@import url(../popup/__nameField/popup__nameField.css);
-@import url(../popup/__vocationField/popup__vocationField.css);
-@import url(../popup/__saveButton/popup__saveButton.css);
+@import url(../popup/__form-item-ffield/popup__form-item-field.css);
+@import url(../popup/__form-item-ffield/__name/popup__form-item-field_name.css);
+@import url(../popup/__form-item-ffield/__vocation/popup__form-item-field_vocation.css);
+@import url(../popup/__save-button/popup__save-button.css);
+@import url(../popup/__image-open/popup__image-container.css);
+@import url(../popup/__image/popup__image.css);
+@import url(../popup/__image-caption/popup__image-caption.css);
+@import url(../popup/__preview/popup__preview.css);
 
 
 .popup {
@@ -13,7 +17,6 @@
   height: 100%;
   position: fixed;
   background-color: rgba(0, 0, 0, 0.5);
-  position: fixed;
   top: 0;
   left: 0;
   right: 0;
@@ -22,5 +25,24 @@
   align-items: center;
   justify-content: center;
   margin: auto;
-  display: none;
+  /*display: none;*/
+  visibility: collapse;
+  opacity: 0;
+  /*transition: visibility 0.7s, opacity 0.4s ease-in-out;
+  -moz-transition: all;*/
+  height: 0; opacity: 0;
+  transition: height 0ms 400ms, opacity 400ms 0ms;
 }
+
+.popup .popup_opened {
+  display: flex;  
+  visibility: visible;
+  opacity: 1;
+  /*-moz-transition: opacity;
+  /*transition: all 0.7s, opacity 0.4s;*/*/
+  height: auto; opacity: 1;
+  transition: height 0ms 0ms, opacity 600ms 0ms;
+}
+
+
+

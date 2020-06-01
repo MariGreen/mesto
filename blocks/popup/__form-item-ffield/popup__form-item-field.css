@@ -1,0 +1,12 @@
+.popup__form-item-field {
+  width: 100%;
+  height: 27.5px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+  margin-bottom: 36px;
+  box-shadow: none;
+}
+
+.popup__form-item-field:first-of-type {
+  margin-bottom: 20px;
+}
+

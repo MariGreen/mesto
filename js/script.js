@@ -55,7 +55,6 @@ function getNameAndVocation () {
 
 function openClose (evt) {
 
-<<<<<<< HEAD
 function fillProfileTemlate () {
   popupProfileName.placeholder = 'Имя';  
   popupProfileVocation.placeholder = 'О себе';
@@ -84,25 +83,6 @@ function openClose (evt) {
       fillCardTemlate ();
     }      
     popup.classList.add('popup_opened');
-=======
-    if (popupChangeUser.classList.contains('popup_opened')) { 
-      popupChangeUser.classList.remove('popup_opened');
-    } else if (popupAddPlace.classList.contains('popup_opened')) {
-      console.log(popupAddPlace.classList);
-      popupAddPlace.classList.remove('popup_opened');
-
-    } else {
-      if (evt.target.classList.contains('profile__edit-button')) {
-       popupChangeUser.classList.add('popup_opened');
-       const closeButton = popupChangeUser.querySelector('.popup__close-button');
-       console.log(closeButton);
-      } else if (evt.target.classList.contains('profile__add-button')) {
-
-        popupAddPlace.classList.add('popup_opened');
-      }      
-      //popup.classList.add('popup_opened');
-    }
->>>>>>> 89d9ad34704447728dca10ed5ab680c5de1de975
   }
 }
 

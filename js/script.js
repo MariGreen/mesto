@@ -45,7 +45,7 @@ const elements = document.querySelector('.elements');
     }
   ];
 
-function getName () {
+function getNameAndVocation () {
   popupProfileName.value = profileName.textContent;
   popupProfileVocation.value = profileVocation.textContent;
 }
@@ -53,14 +53,14 @@ function getName () {
 
 
 
-function profileTemlate () {
+function fillProfileTemlate () {
   popupProfileName.placeholder = 'Имя';  
   popupProfileVocation.placeholder = 'О себе';
   popupHeader.textContent = 'Редактировать профиль';
   saveButton.textContent = 'Сохранить';
 }
 
-function cardTemlate () {
+function fillCardTemlate () {
   popupProfileName.value = '';
   popupProfileName.placeholder = 'Название';  
   popupProfileVocation.value = '';
@@ -70,25 +70,22 @@ function cardTemlate () {
 }
 
 function openClose (evt) {
- //console.log(popup.classList);
-    if (popup.classList.contains('popup_opened')) { 
-      popup.classList.remove('popup_opened');
-    } else {
-      if (evt.target.classList.contains('profile__edit-button')) {
-      // заполняем попап шаблоном профиля
-      profileTemlate (); 
-      } else if (evt.target.classList.contains('profile__add-button')) {
-        // заполняем попап шаблоном карточки
-        cardTemlate ();
-      }      
-      popup.classList.add('popup_opened');
-    }
+   if (popup.classList.contains('popup_opened')) { 
+    popup.classList.remove('popup_opened');
+  } else {
+    if (evt.target.classList.contains('profile__edit-button')) {
+    // заполняем попап шаблоном профиля
+    fillProfileTemlate (); 
+    } else if (evt.target.classList.contains('profile__add-button')) {
+      // заполняем попап шаблоном карточки
+      fillCardTemlate ();
+    }      
+    popup.classList.add('popup_opened');
   }
+}
 
 function closeImage(){
-  //console.log(popupPreview.classList);  
-  popupPreview.classList.remove('popup__preview_opened');
-    
+  popupPreview.classList.remove('popup__preview_opened');    
   }
   
 function saveProfile () {
@@ -129,7 +126,7 @@ function addCard () {
   
 }
 
-//обработка клика по карточке!
+//обработка клика по карточке
 
 elements.addEventListener("click", (evt) => {
   const list_item = evt.target.closest(".element");
@@ -147,12 +144,9 @@ elements.addEventListener("click", (evt) => {
     const cardPicture = list_item.querySelector('.element__picture');
     const popupPicture = document.querySelector('.popup__image');
     popupPicture.src = cardPicture.src;
-    //const cardCaption = list_item.textContent;
     const popupCaption = document.querySelector('.popup__image-caption');
     popupCaption.textContent = list_item.textContent;
     popupCaption.alt = list_item.textContent;
-
-
     console.log(popupCaption.alt);
   }  
 });
@@ -182,10 +176,9 @@ function formSubmitHandler (evt) {
 closeButton.addEventListener('click', openClose);
 
 
-
 //редактирование профиля
 editUser.addEventListener('click', function(evt) {
-  getName();
+  getNameAndVocation();
   openClose(evt);
 });
 
@@ -193,7 +186,6 @@ editUser.addEventListener('click', function(evt) {
 newCard.addEventListener('click', function(evt) {
   openClose(evt);
 });
-
 
 
 // Прикрепляем обработчик к форме:

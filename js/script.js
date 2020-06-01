@@ -200,3 +200,5 @@ newCard.addEventListener('click', function(evt) {
 // он будет следить за событием “submit” - «отправка»
 formElement.addEventListener('submit', formSubmitHandler);
 
+
+

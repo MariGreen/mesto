@@ -1,5 +1,4 @@
-const popupChangeUser = document.querySelector('.popup_change-user');
-const popupAddPlace = document.querySelector('.popup_add-place');
+const popup = document.querySelector('.popup');
 const popupPreview = document.querySelector('.popup__preview');
 const profileName = document.querySelector('.profile__name');
 const popupProfileName = document.querySelector('.popup__form-item-field_name');
@@ -7,7 +6,7 @@ const profileVocation = document.querySelector('.profile__vocation');
 const popupProfileVocation = document.querySelector('.popup__form-item-field_vocation');
 const formElement = document.querySelector('.popup__form-container');
 const editUser = document.querySelector('.profile__edit-button');
-//const closeButton = document.querySelector('.popup__close-button');
+const closeButton = document.querySelector('.popup__close-button');
 
 
 const popupHeader = document.querySelector('.popup__edit-profile');
@@ -53,7 +52,6 @@ function getNameAndVocation () {
 
 
 
-function openClose (evt) {
 
 function fillProfileTemlate () {
   popupProfileName.placeholder = 'Имя';  
@@ -109,7 +107,7 @@ function render () {
     elementPlace.textContent = item.name;
     elementPicture.alt = item.name;
     elements.append(element);
-    //console.log(elementPicture.alt);
+    console.log(elementPicture.alt);
   })
 }
 render ();
@@ -175,7 +173,7 @@ function formSubmitHandler (evt) {
   
 }
 
-//closeButton.addEventListener('click', openClose);
+closeButton.addEventListener('click', openClose);
 
 
 //редактирование профиля

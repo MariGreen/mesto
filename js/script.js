@@ -1,17 +1,14 @@
 const popupChangeUser = document.querySelector('.popup_change-user');
 const popupAddPlace = document.querySelector('.popup_add-place');
 const popupPreview = document.querySelector('.popup__preview');
-
 const profileName = document.querySelector('.profile__name');
 const popupProfileName = document.querySelector('.popup__form-item-field_name');
 const profileVocation = document.querySelector('.profile__vocation');
 const popupProfileVocation = document.querySelector('.popup__form-item-field_vocation');
-
-const popupPlaceName = document.querySelector('.popup__form-item-field_place');
-const popupImageLink = document.querySelector('.popup__form-item-field_link');
-
-//const formElement = document.querySelector('.popup__form-container');
+const formElement = document.querySelector('.popup__form-container');
 const editUser = document.querySelector('.profile__edit-button');
+//const closeButton = document.querySelector('.popup__close-button');
+
 
 const popupHeader = document.querySelector('.popup__edit-profile');
 const saveButton = document.querySelector('.popup__save-button');
@@ -57,41 +54,31 @@ function getName () {
 
 
 function openClose (evt) {
-  if (evt.target.classList.contains('profile__edit-button')) {
-    popupChangeUser.classList.add('popup_opened');
-    const userForm = document.querySelector('.popup_change-user');
-    const closeButtonUserForm = userForm.querySelector('.popup__close-button');
-    
-    const formElementUser = userForm.querySelector('.popup__form-container');
-    formElementUser.addEventListener('submit', function(evt){
-      formSubmitHandler (userForm, evt);
-      });
 
-    closeButtonUserForm.addEventListener('click', function(){
-      closeForm (userForm);
-      });
+    if (popupChangeUser.classList.contains('popup_opened')) { 
+      popupChangeUser.classList.remove('popup_opened');
+    } else if (popupAddPlace.classList.contains('popup_opened')) {
+      console.log(popupAddPlace.classList);
+      popupAddPlace.classList.remove('popup_opened');
+
+    } else {
+      if (evt.target.classList.contains('profile__edit-button')) {
+       popupChangeUser.classList.add('popup_opened');
+       const closeButton = popupChangeUser.querySelector('.popup__close-button');
+       console.log(closeButton);
+      } else if (evt.target.classList.contains('profile__add-button')) {
+
+        popupAddPlace.classList.add('popup_opened');
+      }      
+      //popup.classList.add('popup_opened');
+    }
   }
-  else if (evt.target.classList.contains('profile__add-button')) {
-    popupAddPlace.classList.add('popup_opened');
-    const placeForm = document.querySelector('.popup_add-place');
-    const closeButtonPlaceForm = placeForm.querySelector('.popup__close-button');
-    const formElementPlace = placeForm.querySelector('.popup__form-container');
-    formElementPlace.addEventListener('submit', function(evt){
-      formSubmitHandler (placeForm, evt);
-      });
-    closeButtonPlaceForm.addEventListener('click', function(){
-      closeForm (placeForm);
-      });
-  }
-}
 
 function closeImage(){
-  popupPreview.classList.remove('popup__preview_opened');    
-}
-
-function closeForm (smth) {
-  smth.classList.remove('popup_opened');
-}  
+  //console.log(popupPreview.classList);  
+  popupPreview.classList.remove('popup__preview_opened');
+    
+  }
   
 function saveProfile () {
   // Получите значение полей из свойства value
@@ -101,19 +88,6 @@ function saveProfile () {
   profileVocation.textContent = newJob;
   profileName.textContent = newName;
 }
-
-function savePlace () {
-  const newCardPicture = document.querySelector('.element__picture');
-  const newCardPlace = document.querySelector('.element__place');
-
-  newCardPicture.src = popupImageLink.value;
-  newCardPlace.textContent = popupPlaceName.value;
-  newCardPicture.alt = popupPlaceName.value;
-}
-
-
-
-
 
 function render () {
   initialCards.forEach(function(item) {
@@ -130,11 +104,18 @@ function render () {
 }
 render ();
 
+
+
 function addCard () {
   const elementTemplate = document.querySelector('.element_template').content;
   const element = elementTemplate.cloneNode(true);
   elements.prepend(element);
-  savePlace ();  
+  const newCardPicture = document.querySelector('.element__picture');
+  const newCardPlace = document.querySelector('.element__place');
+  newCardPicture.src = popupProfileVocation.value;
+  newCardPlace.textContent = popupProfileName.value;
+  newCardPicture.alt = popupProfileName.value;
+  
 }
 
 //обработка клика по карточке!
@@ -168,23 +149,28 @@ elements.addEventListener("click", (evt) => {
 
 // Обработчик «отправки» формы, хотя пока
 // она никуда отправляться не будет
-function formSubmitHandler (smth, evt) {
+function formSubmitHandler (evt) {
   evt.preventDefault(); // Эта строчка отменяет стандартную отправку формы.
                                                 // Так мы можем определить свою логику отправки.
                                                 // О том, как это делать, расскажем позже.
 
   // смотрим какой попап открыт
-  console.log(smth.classList);
-  if (smth.classList.contains('popup_change-user')) {
+
+  if (popupHeader.textContent === 'Редактировать профиль') {
   //функция сохранения профиля
   saveProfile ();
 
-  } else if (smth.classList.contains('popup_add-place')) {
+  } else if (popupHeader.textContent === 'Новое место') {
   //функция сохранения карточки
   addCard ();
   }
-  closeForm(smth);
+  openClose (evt);  
+  
 }
+
+//closeButton.addEventListener('click', openClose);
+
+
 
 //редактирование профиля
 editUser.addEventListener('click', function(evt) {
@@ -201,5 +187,5 @@ newCard.addEventListener('click', function(evt) {
 
 // Прикрепляем обработчик к форме:
 // он будет следить за событием “submit” - «отправка»
-//formElement.addEventListener('submit', formSubmitHandler);
+formElement.addEventListener('submit', formSubmitHandler);
 

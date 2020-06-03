@@ -17,34 +17,6 @@ const newCardButton = document.querySelector('.profile__add-button');
 
 const elements = document.querySelector('.elements');
 
-  
-
-const initialCards = [
-    {
-        name: 'Архыз',
-        link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
-    },
-    {
-        name: 'Челябинская область',
-        link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
-    },
-    {
-        name: 'Иваново',
-        link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
-    },
-    {
-        name: 'Камчатка',
-        link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
-    },
-    {
-        name: 'Холмогорский район',
-        link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
-    },
-    {
-        name: 'Байкал',
-        link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
-    }
-];
 
 function getNameAndVocation () {
   popupProfileName.value = profileName.textContent;
@@ -95,19 +67,15 @@ function saveProfile () {
   profileName.textContent = newName;
 }
 
-function cloneCard () {
+function addCard (name, link) {
   const elementTemplate = document.querySelector('.element_template').content;
   const element = elementTemplate.cloneNode(true);
-  return element;
-}
-
-
-function addCard (element, name, link) {
   const newCardPicture = element.querySelector('.element__picture');
   const newCardPlace = element.querySelector('.element__place');
   newCardPicture.src = link;
   newCardPlace.textContent = name;
-  newCardPicture.alt = ('Фотография «' + name + '»');  
+  newCardPicture.alt = ('Фотография «' + name + '»');
+  return element;  
 }
 
 
@@ -120,8 +88,8 @@ function appendCard (element, elementContainer) {
 }
 
 initialCards.forEach(function(item) {
-  const element = cloneCard ();
-  addCard (element, item.name, item.link);
+  const element = addCard (item.name, item.link);
+  //addCard (element, item.name, item.link);
   appendCard (element, elements);
 })
 
@@ -162,8 +130,7 @@ function formSubmitHandler (evt) {
 
   } else if (popupHeader.textContent === 'Новое место') {
     //функция сохранения карточки
-    const element = cloneCard();
-    addCard (element, popupProfileName.value, popupProfileVocation.value);
+    const element = addCard (popupProfileName.value, popupProfileVocation.value);
     prependCard (element, elements);
   }
   openClose (evt);  

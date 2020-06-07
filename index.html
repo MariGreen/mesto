@@ -31,16 +31,7 @@
         </button>
       </section>
 
-      <section class="elements">        
-        <template class="element_template">
-          <div class="element">
-            <button type="submit" class="element__trash"></button>
-            <img src="" alt="" class="element__picture">
-              <div class="element__data">
-              <h5 class="element__place"></h5>
-            <button type="submit" class="element__like element__like_black"></button>
-          </div>
-        </template>
+      <section class="elements" aria-label="секция с фотографиями">        
       </section>
 
     </main>
@@ -74,6 +65,17 @@
 
   </section>
     
+  <template class="element_template">
+    <div class="element">
+      <button type="submit" class="element__trash"></button>
+      <img src="" alt="подпись фото" class="element__picture">
+        <div class="element__data">
+          <h5 class="element__place"></h5>
+          <button type="submit" class="element__like element__like_black"></button>
+       </div>
+    </div>
+  </template>
+  <script src="js/inititialCards.js"></script>
   <script src="./js/script.js"></script>
 </body>
 </html>

@@ -3,9 +3,7 @@ const popupPreview = document.querySelector('.popup__preview');
 const profileName = document.querySelector('.profile__name');
 const popupProfileName = document.querySelector('.popup__form-item-field_name');
 const profileVocation = document.querySelector('.profile__vocation');
-const popupProfileVocation = document.querySelector(
-  '.popup__form-item-field_vocation'
-);
+const popupProfileVocation = document.querySelector('.popup__form-item-field_vocation');
 const formElement = document.querySelector('.popup__form-container');
 const editUser = document.querySelector('.profile__edit-button');
 const closeButton = document.querySelector('.popup__close-button');
@@ -39,8 +37,9 @@ function fillCardTemlate() {
 }
 
 function openClose(evt) {
-  if (popup.classList.contains('popup_opened')) {
+  if (popup.classList.contains('popup_opened') && (evt.keyCode == '27') | (evt.type == 'click')) {
     popup.classList.remove('popup_opened');
+    document.removeEventListener('keydown', openClose);
   } else {
     if (evt.target.classList.contains('profile__edit-button')) {
       // заполняем попап шаблоном профиля
@@ -50,11 +49,13 @@ function openClose(evt) {
       fillCardTemlate();
     }
     popup.classList.add('popup_opened');
+    document.addEventListener('keydown', openClose);
   }
 }
 
 function closeImage() {
   popupPreview.classList.remove('popup__preview_opened');
+  document.removeEventListener('keydown', keyHandler);
 }
 
 function saveProfile() {
@@ -83,19 +84,41 @@ function addCard(name, link) {
   trashButton.addEventListener('click', function (evt) {
     evt.target.closest('.element').remove();
   });
-  newCardPicture.addEventListener('click', function (evt) {
-    popupPreview.classList.toggle('popup__preview_opened');
-    const closeButtonImg = popupPreview.querySelector('.popup__close-button');
-    closeButtonImg.addEventListener('click', closeImage);
-    const element = evt.target.closest('.element');
-    const cardPicture = element.querySelector('.element__picture');
-    const popupPicture = document.querySelector('.popup__image');
-    popupPicture.src = cardPicture.src;
-    const popupCaption = document.querySelector('.popup__image-caption');
-    popupCaption.textContent = element.textContent;
-    popupCaption.alt = element.textContent;
-  });
+  newCardPicture.addEventListener('click', showPopupImage);
+  document.addEventListener('click', clickListener);
   return element;
+}
+
+function showPopupImage(evt) {
+  popupPreview.classList.toggle('popup__preview_opened');
+  const closeButtonImg = popupPreview.querySelector('.popup__close-button');
+  closeButtonImg.addEventListener('click', closeImage);
+  const element = evt.target.closest('.element');
+  const cardPicture = element.querySelector('.element__picture');
+  const popupPicture = document.querySelector('.popup__image');
+  popupPicture.src = cardPicture.src;
+  const popupCaption = document.querySelector('.popup__image-caption');
+  popupCaption.textContent = element.textContent;
+  popupCaption.alt = element.textContent;
+  document.addEventListener('keydown', keyHandler);
+  document.addEventListener('click', clickListener);
+}
+
+function keyHandler(evt) {
+  console.log(evt.target);
+  if (evt.keyCode == '27') {
+    closeImage();
+  }
+}
+
+function clickListener(evt) {
+  console.log(evt.target.classList);
+  if (evt.target.classList.contains('popup__preview_opened')) {
+    closeImage();
+  } else if (evt.target.classList.contains('popup_opened')) {
+    openClose();
+  }
+  return;
 }
 
 function prependCard(element, elementContainer) {

@@ -5,6 +5,7 @@ const popupProfileName = document.querySelector('.popup__form-item-field_name');
 const profileVocation = document.querySelector('.profile__vocation');
 const popupProfileVocation = document.querySelector('.popup__form-item-field_vocation');
 const formElement = document.querySelector('.popup__form-container');
+
 const editUser = document.querySelector('.profile__edit-button');
 const closeButton = document.querySelector('.popup__close-button');
 
@@ -112,7 +113,6 @@ function keyHandler(evt) {
 }
 
 function clickListener(evt) {
-  console.log(evt.target.classList);
   if (evt.target.classList.contains('popup__preview_opened')) {
     closeImage();
   } else if (evt.target.classList.contains('popup_opened')) {
@@ -120,6 +120,11 @@ function clickListener(evt) {
   }
   return;
 }
+
+document.addEventListener('click', function (evt) {
+  evt.target.classList.remove('popup_opened');
+  evt.stopPropagation();
+});
 
 function prependCard(element, elementContainer) {
   elementContainer.prepend(element);
@@ -141,7 +146,7 @@ initialCards.forEach(function (item) {
 
 // Обработчик «отправки» формы
 function formSubmitHandler(evt) {
-  evt.preventDefault(); // отмена стандартной отправки формы.
+  evt.preventDefault();
   // смотрим какой попап открыт
   if (popupHeader.textContent === 'Редактировать профиль') {
     //функция сохранения профиля

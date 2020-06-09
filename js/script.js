@@ -1,19 +1,28 @@
-const popup = document.querySelector('.popup');
+//popups
+const popupProfile = document.querySelector('.popup_profile');
+const popupPlace = document.querySelector('.popup_place');
 const popupPreview = document.querySelector('.popup__preview');
+const popupHeader = document.querySelector('.popup__edit-profile');
+const saveButton = document.querySelector('.popup__save-button');
+
+//popups values
 const profileName = document.querySelector('.profile__name');
 const popupProfileName = document.querySelector('.popup__form-item-field_name');
 const profileVocation = document.querySelector('.profile__vocation');
 const popupProfileVocation = document.querySelector('.popup__form-item-field_vocation');
-const formElement = document.querySelector('.popup__form-container');
+
+const popupPlaceName = document.querySelector('.popup__form-item-field_place');
+const popupPlaceLink = document.querySelector('.popup__form-item-field_link');
+
+//forms
+
+const formProfile = document.querySelector('#change-user');
+const formPlace = document.querySelector('#change-place');
 
 const editUser = document.querySelector('.profile__edit-button');
-const closeButton = document.querySelector('.popup__close-button');
 
-const popupHeader = document.querySelector('.popup__edit-profile');
-const saveButton = document.querySelector('.popup__save-button');
-
+//cards
 const newCardButton = document.querySelector('.profile__add-button');
-
 const elements = document.querySelector('.elements');
 
 function getNameAndVocation() {
@@ -21,36 +30,36 @@ function getNameAndVocation() {
   popupProfileVocation.value = profileVocation.textContent;
 }
 
-function fillProfileTemlate() {
-  popupProfileName.placeholder = 'Имя';
-  popupProfileVocation.placeholder = 'О себе';
-  popupHeader.textContent = 'Редактировать профиль';
-  saveButton.textContent = 'Сохранить';
+function setPlaceAndLink() {
+  popupPlaceName.value = '';
+  popupPlaceLink.value = '';
 }
 
-function fillCardTemlate() {
-  popupProfileName.value = '';
-  popupProfileName.placeholder = 'Название';
-  popupProfileVocation.value = '';
-  popupProfileVocation.placeholder = 'Ссылка';
-  popupHeader.textContent = 'Новое место';
-  saveButton.textContent = 'Создать';
+function openForm(evt, popup) {
+  popup.classList.add('popup_opened');
+  document.addEventListener(
+    'keydown',
+    (evt) => {
+      closeForm(evt, popup);
+    },
+    { once: true }
+  );
+  const closeButton = popup.querySelector('.popup__close-button');
+  closeButton.addEventListener(
+    'click',
+    (evt) => {
+      closeForm(evt, popup);
+    },
+    { once: true }
+  );
 }
 
-function openClose(evt) {
-  if (popup.classList.contains('popup_opened') && (evt.keyCode == '27') | (evt.type == 'click')) {
+function closeForm(evt, popup) {
+  if (
+    popup.classList.contains('popup_opened') &&
+    (evt.keyCode == '27') | (evt.type == 'click') | (evt.type == 'submit')
+  ) {
     popup.classList.remove('popup_opened');
-    document.removeEventListener('keydown', openClose);
-  } else {
-    if (evt.target.classList.contains('profile__edit-button')) {
-      // заполняем попап шаблоном профиля
-      fillProfileTemlate();
-    } else if (evt.target.classList.contains('profile__add-button')) {
-      // заполняем попап шаблоном карточки
-      fillCardTemlate();
-    }
-    popup.classList.add('popup_opened');
-    document.addEventListener('keydown', openClose);
   }
 }
 
@@ -73,10 +82,13 @@ function addCard(name, link) {
   const element = elementTemplate.cloneNode(true);
   const newCardPicture = element.querySelector('.element__picture');
   const newCardPlace = element.querySelector('.element__place');
+
   newCardPicture.src = link;
   newCardPlace.textContent = name;
-  newCardPicture.alt = 'Фотография «' + name + '»';
+  newCardPicture.alt = `Фотография «${name}»`;
+
   const likeButton = element.querySelector('.element__like');
+
   likeButton.addEventListener('click', function () {
     likeButton.classList.toggle('element__like_black');
   });
@@ -85,6 +97,7 @@ function addCard(name, link) {
   trashButton.addEventListener('click', function (evt) {
     evt.target.closest('.element').remove();
   });
+
   newCardPicture.addEventListener('click', showPopupImage);
   document.addEventListener('click', clickListener);
   return element;
@@ -106,7 +119,7 @@ function showPopupImage(evt) {
 }
 
 function keyHandler(evt) {
-  console.log(evt.target);
+  // console.log(evt.target);
   if (evt.keyCode == '27') {
     closeImage();
   }
@@ -115,8 +128,6 @@ function keyHandler(evt) {
 function clickListener(evt) {
   if (evt.target.classList.contains('popup__preview_opened')) {
     closeImage();
-  } else if (evt.target.classList.contains('popup_opened')) {
-    openClose();
   }
   return;
 }
@@ -144,34 +155,33 @@ initialCards.forEach(function (item) {
   });
 });
 
-// Обработчик «отправки» формы
-function formSubmitHandler(evt) {
+// Обработчики «отправки» формы
+function formProlileSubmitHandler(evt) {
   evt.preventDefault();
-  // смотрим какой попап открыт
-  if (popupHeader.textContent === 'Редактировать профиль') {
-    //функция сохранения профиля
-    saveProfile();
-  } else if (popupHeader.textContent === 'Новое место') {
-    //функция сохранения карточки
-    const element = addCard(popupProfileName.value, popupProfileVocation.value);
-    prependCard(element, elements);
-  }
-  openClose(evt);
+  saveProfile();
+  closeForm(evt, popupProfile);
 }
 
-closeButton.addEventListener('click', openClose);
+function formPlaceSubmitHandler(evt) {
+  evt.preventDefault();
+  const element = addCard(popupPlaceName.value, popupPlaceLink.value);
+  prependCard(element, elements);
+  closeForm(evt, popupPlace);
+}
 
 //редактирование профиля
 editUser.addEventListener('click', function (evt) {
   getNameAndVocation();
-  openClose(evt);
+  openForm(evt, popupProfile);
 });
 
 //добавление картинки
 newCardButton.addEventListener('click', function (evt) {
-  openClose(evt);
+  setPlaceAndLink();
+  openForm(evt, popupPlace);
 });
 
 // Прикрепляем обработчик к форме:
 // он будет следить за событием “submit” - «отправка»
-formElement.addEventListener('submit', formSubmitHandler);
+formProfile.addEventListener('submit', formProlileSubmitHandler);
+formPlace.addEventListener('submit', formPlaceSubmitHandler);

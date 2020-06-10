@@ -160,6 +160,7 @@ function formProlileSubmitHandler(evt) {
   evt.preventDefault();
   saveProfile();
   closeForm(evt, popupProfile);
+  //document.getElementById('change-user').reset();
 }
 
 function formPlaceSubmitHandler(evt) {
@@ -167,6 +168,8 @@ function formPlaceSubmitHandler(evt) {
   const element = addCard(popupPlaceName.value, popupPlaceLink.value);
   prependCard(element, elements);
   closeForm(evt, popupPlace);
+  document.getElementById('change-place').reset();
+  console.log(document.getElementById('change-place'));
 }
 
 //редактирование профиля

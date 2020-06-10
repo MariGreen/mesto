@@ -1,17 +1,17 @@
 .popup__save-button {
   -webkit-appearance: none;
-     -moz-appearance: none;
-          appearance: none;
+  -moz-appearance: none;
+  appearance: none;
   border: none;
   border-radius: 4px;
   background-color: rgb(0, 0, 0);
-  font-family: 'Inter', 'Arial', 'Helvetica', sans-serif;
+  font-family: "Inter", "Arial", "Helvetica", sans-serif;
   font-style: normal;
   font-weight: 400;
   font-size: 18px;
   line-height: 1.22;
   text-align: center;
-  color: #FFFFFF;
+  color: #ffffff;
   width: 100%;
   margin: 0 auto;
   min-height: 51px;
@@ -28,5 +28,9 @@
     min-height: 40px;
     font-size: 14px;
     line-height: 1.21;
-    }
   }
+}
+
+.popup__save-button_inactiv {
+  background-color: rgb(200, 200, 200);
+}

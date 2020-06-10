@@ -36,45 +36,60 @@
 
     <section class="popups">
       <div class="popup popup_profile">
-        <form id="change-user" name="change-user" action="#" method="POST" class="popup__form-container">
+        <form id="change-user" name="change-user" action="#" method="POST" class="popup__form-container" novalidate>
           <button type="button" class="popup__close-button"></button>
           <h5 class="popup__title">Редактировать профиль</h5>
           <fieldset class="popup__form-item">
             <input
+              id="name-input"
               type="text"
               name="name"
               class="popup__form-item-field popup__form-item-field_name"
               placeholder="Имя"
               value=""
+              minlength="2"
+              maxlength="40"
               required
             />
+            <span id="name-input-error" class="popup__form-input-error"></span>
+
             <input
+              id="vocation-input"
               type="text"
               name="vocation"
               class="popup__form-item-field popup__form-item-field_vocation"
               placeholder="О себе"
               value=""
+              minlength="2"
+              maxlength="200"
               required
             />
+            <span id="vocation-input-error" class="popup__form-input-error"></span>
           </fieldset>
           <button type="submit" class="popup__save-button">Сохранить</button>
         </form>
       </div>
 
       <div class="popup popup_place">
-        <form id="change-place" name="change-place" action="#" method="POST" class="popup__form-container">
+        <form id="change-place" name="change-place" action="#" method="POST" class="popup__form-container" novalidate>
           <button type="button" class="popup__close-button popup__close-button_place"></button>
           <h5 class="popup__title">Новое место</h5>
           <fieldset class="popup__form-item">
             <input
+              id="place-input"
               type="text"
               name="place"
               class="popup__form-item-field popup__form-item-field_place"
               placeholder="Название"
               value=""
+              minlength="1"
+              maxlength="30"
               required
             />
+            <span id="place-input-error" class="popup__form-input-error"></span>
+
             <input
+              id="link-input"
               type="url"
               name="link"
               class="popup__form-item-field popup__form-item-field_link"
@@ -82,8 +97,10 @@
               value=""
               required
             />
+            <span id="link-input-error" class="popup__form-input-error"></span>
           </fieldset>
-          <button type="submit" class="popup__save-button">Создать</button>
+
+          <button type="submit" class="popup__save-button" disabled>Создать</button>
         </form>
       </div>
 
@@ -106,6 +123,7 @@
         </div>
       </div>
     </template>
+    <script src="js/validate.js"></script>
     <script src="js/inititialCards.js"></script>
     <script src="./js/script.js"></script>
   </body>

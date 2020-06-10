@@ -6,18 +6,16 @@
   box-sizing: border-box;
   background-color: transparent;
   text-align: start;
-  font-family: 'Inter', 'Arial', 'Helvetica', sans-serif;
+  font-family: "Inter", "Arial", "Helvetica", sans-serif;
   font-style: normal;
   font-weight: normal;
   font-size: 14px;
   line-height: 1.21;
   color: #000000;
-  
+  position: relative;
 }
-
 
 .popup__form-item:focus {
   outline: none;
   border: 1px solid rebeccapurple;
 }
-

@@ -30,7 +30,7 @@ const obj = {
   submitButtonSelector: '.popup__save-button',
   inactiveButtonClass: 'popup__save-button_inactiv',
   inputErrorClass: 'popup__input_type_error',
-  errorClass: 'popup__error_visible',
+  errorClass: 'popup__form-item-field_error',
 };
 
 function getNameAndVocation() {
@@ -46,6 +46,7 @@ function setPlaceAndLink() {
 function openForm(evt, popup) {
   popup.classList.add('popup_opened');
   enableValidation(obj);
+  makeClear(obj);
   document.addEventListener('keydown', closeFormEscape);
   const closeButton = popup.querySelector('.popup__close-button');
   closeButton.addEventListener('click', closeFormClick);

@@ -2,7 +2,8 @@
   border: 0px;
   border-color: none;
   width: 100%;
-  padding: 1px;
+  padding: 0;
+  margin: 0;
   box-sizing: border-box;
   background-color: transparent;
   text-align: start;
@@ -12,10 +13,11 @@
   font-size: 14px;
   line-height: 1.21;
   color: #000000;
-  position: relative;
 }
 
-.popup__form-item:focus {
-  outline: none;
-  border: 1px solid rebeccapurple;
+@media screen and (max-width: 450px) {
+  .popup__form-item {
+    font-size: 12px;
+    line-height: 1.25;
+  }
 }

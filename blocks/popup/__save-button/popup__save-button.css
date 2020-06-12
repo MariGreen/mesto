@@ -13,7 +13,7 @@
   text-align: center;
   color: #ffffff;
   width: 100%;
-  margin: 0 auto;
+  margin: 18px auto 0px;
   min-height: 51px;
 }
 
@@ -23,14 +23,24 @@
   transition: all 1s ease;
 }
 
+.popup__save-button_inactiv {
+  border: 1px solid #000000;
+  background-color: rgb(255, 255, 255);
+  box-sizing: border-box;
+  color: #000;
+  opacity: 0.2;
+}
+
+.popup__save-button_inactiv:hover {
+  opacity: 0.2;
+  cursor: default;
+}
+
 @media screen and (max-width: 768px) {
   .popup__save-button {
     min-height: 40px;
     font-size: 14px;
     line-height: 1.21;
+    border-radius: 2px;
   }
-}
-
-.popup__save-button_inactiv {
-  background-color: rgb(200, 200, 200);
 }

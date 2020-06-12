@@ -40,33 +40,37 @@
           <button type="button" class="popup__close-button"></button>
           <h5 class="popup__title">Редактировать профиль</h5>
           <fieldset class="popup__form-item">
-            <input
-              id="name-input"
-              type="text"
-              name="name"
-              class="popup__form-item-field popup__form-item-field_name"
-              placeholder="Имя"
-              value=""
-              minlength="2"
-              maxlength="40"
-              autocomplete="off"
-              required
-            />
-            <span id="name-input-error" class="popup__form-input-error"></span>
+            <div class="popup__form-element">
+              <input
+                id="name-input"
+                type="text"
+                name="name"
+                class="popup__form-item-field popup__form-item-field_name"
+                placeholder="Имя"
+                value=""
+                minlength="2"
+                maxlength="40"
+                autocomplete="off"
+                required
+              />
+              <span id="name-input-error" class="popup__form-item popup__form-item_error"></span>
+            </div>
 
-            <input
-              id="vocation-input"
-              type="text"
-              name="vocation"
-              class="popup__form-item-field popup__form-item-field_vocation"
-              placeholder="О себе"
-              value=""
-              minlength="2"
-              maxlength="200"
-              autocomplete="off"
-              required
-            />
-            <span id="vocation-input-error" class="popup__form-input-error"></span>
+            <div class="popup__form-element">
+              <input
+                id="vocation-input"
+                type="text"
+                name="vocation"
+                class="popup__form-item-field popup__form-item-field_vocation"
+                placeholder="О себе"
+                value=""
+                minlength="2"
+                maxlength="200"
+                autocomplete="off"
+                required
+              />
+              <span id="vocation-input-error" class="popup__form-item popup__form-item_error"></span>
+            </div>
           </fieldset>
           <button type="submit" class="popup__save-button">Сохранить</button>
         </form>
@@ -77,30 +81,35 @@
           <button type="button" class="popup__close-button popup__close-button_place"></button>
           <h5 class="popup__title">Новое место</h5>
           <fieldset class="popup__form-item">
-            <input
-              id="place-input"
-              type="text"
-              name="place"
-              class="popup__form-item-field popup__form-item-field_place"
-              placeholder="Название"
-              value=""
-              minlength="1"
-              maxlength="30"
-              autocomplete="off"
-              required
-            />
-            <span id="place-input-error" class="popup__form-input-error"></span>
+            <div class="popup__form-element">
+              <input
+                id="place-input"
+                type="text"
+                name="place"
+                class="popup__form-item-field popup__form-item-field_place"
+                placeholder="Название"
+                value=""
+                minlength="1"
+                maxlength="30"
+                autocomplete="off"
+                required
+              />
+              <span id="place-input-error" class="popup__form-item popup__form-item_error"></span>
+            </div>
 
-            <input
-              id="link-input"
-              type="url"
-              name="link"
-              class="popup__form-item-field popup__form-item-field_link"
-              placeholder="Ссылка"
-              value=""
-              required
-            />
-            <span id="link-input-error" class="popup__form-input-error"></span>
+            <div class="popup__form-element">
+              <input
+                id="link-input"
+                type="url"
+                name="link"
+                class="popup__form-item-field popup__form-item-field_link"
+                placeholder="Ссылка"
+                value=""
+                autocomplete="off"
+                required
+              />
+              <span id="link-input-error" class="popup__form-item popup__form-item_error"></span>
+            </div>
           </fieldset>
 
           <button type="submit" class="popup__save-button">Создать</button>

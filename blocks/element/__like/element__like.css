@@ -1,10 +1,10 @@
 .element__like {
   -webkit-appearance: none;
-     -moz-appearance: none;
-          appearance: none;
+  -moz-appearance: none;
+  appearance: none;
   border: none;
-  border-radius: none;
-  background:#fff;
+  border-radius: 0;
+  background: #fff;
   background-image: url(../../../images/elements_heart_black.svg);
   width: 21px;
   height: 18.1px;

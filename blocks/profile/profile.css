@@ -6,13 +6,13 @@
 @import url(./__add-button/profile__add-button.css);
 
 .profile {
-  width: calc(100% - 19px*2);
+  width: calc(100% - 19px * 2);
   max-width: 282px;
   margin: 0 auto;
   display: grid;
   grid-template-columns: 1fr;
   align-items: center;
-  }
+}
 
 @media screen and (min-width: 630px) {
   .profile {
@@ -21,7 +21,7 @@
     justify-items: start;
     align-items: center;
     margin: 0px auto 34px;
- }
+  }
 }
 
 @media screen and (min-width: 1020px) {
@@ -30,5 +30,5 @@
     max-width: 882px;
     grid-template-columns: 120px 2fr 150px;
     grid-column-gap: 30px;
- }
+  }
 }

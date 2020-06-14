@@ -21,11 +21,6 @@ function notValid(input, errorText, errorBorder) {
   input.classList.add(errorText);
   error.textContent = input.validationMessage;
   input.classList.add(errorBorder);
-  if (error.textContent.length > 40) {
-    error.style.fontSize = '8px';
-  } else {
-    error.style.fontSize = '12px';
-  }
 }
 
 function handleInput(evt, errorText, errorBorder) {

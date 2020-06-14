@@ -206,3 +206,5 @@ newCardButton.addEventListener('click', (evt) => {
 // он будет следить за событием “submit” - «отправка»
 formProfile.addEventListener('submit', formProlileSubmitHandler);
 formPlace.addEventListener('submit', formPlaceSubmitHandler);
+
+//постаралась везде, где можно, избавиться от поднятия

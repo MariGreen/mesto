@@ -1,6 +1,6 @@
 .popup__form-item {
   border: 0px;
-  border-color: none;
+  border-color: inherit;
   width: 100%;
   padding: 0;
   margin: 0;
@@ -12,7 +12,7 @@
   font-weight: normal;
   font-size: 14px;
   line-height: 1.21;
-  color: #000000;
+  color: #000;
 }
 
 @media screen and (max-width: 450px) {

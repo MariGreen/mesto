@@ -12,6 +12,7 @@
   display: grid;
   grid-template-columns: 1fr;
   align-items: center;
+  flex-shrink: 0;
 }
 
 @media screen and (min-width: 630px) {

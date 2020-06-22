@@ -6,15 +6,14 @@
   margin: 0 auto;
 }
 
-
 @media screen and (min-width: 630px) {
   .footer {
     max-width: 582px;
   }
-}  
+}
 
 @media screen and (min-width: 1020px) {
   .footer {
     max-width: 882px;
- }
+  }
 }

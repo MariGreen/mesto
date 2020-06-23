@@ -4,4 +4,5 @@
   opacity: 1;
   height: auto;
   transition: height 0ms 0ms, opacity 600ms 0ms;
+  background-color: rgba(0, 0, 0, 0.9);
 }

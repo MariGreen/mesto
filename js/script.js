@@ -108,11 +108,6 @@ initialCards.forEach((item) => {
   elements.append(cardElement);
 });
 
-//старое
-//popups
-// const popupProfile = document.querySelector('.popup_profile');
-// const popupPlace = document.querySelector('.popup_place');
-
 //popups values
 const profileName = document.querySelector('.profile__name');
 const popupProfileName = document.querySelector('.popup__form-item-field_name');
@@ -127,15 +122,6 @@ const editUser = document.querySelector('.profile__edit-button');
 
 //cards
 const newCardButton = document.querySelector('.profile__add-button');
-
-// const obj = {
-//   formSelector: '.popup__form-container',
-//   inputSelector: '.popup__form-item-field',
-//   submitButtonSelector: '.popup__save-button',
-//   inactiveButtonClass: 'popup__save-button_inactiv',
-//   inputErrorClass: 'popup__input_type_error',
-//   errorClass: 'popup__form-item-field_error',
-// };
 
 function getNameAndVocation() {
   popupProfileName.value = profileName.textContent;
@@ -176,9 +162,17 @@ function closeFormEscape(evt) {
 
 //открытие форм
 function openForm(evt, popup) {
+  switch (popup) {
+    case popupProfile:
+      console.log(popupProfile, popup);
+      validatorProfile.makeClear(obj, popupProfile);
+      validatorProfile.enableValidation(obj, popupProfile);
+      break;
+    case popupPlace:
+      validatorPlace.makeClear(obj, popupPlace);
+      validatorPlace.enableValidation(obj, popupPlace);
+  }
   popup.classList.add('popup_opened');
-  // enableValidation();
-  // makeClear(obj);
   document.addEventListener('keydown', closeFormEscape);
   const closeButton = popup.querySelector('.popup__close-button');
   closeButton.addEventListener('click', closeFormClick);

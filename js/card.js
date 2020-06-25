@@ -1,34 +1,10 @@
-const initialCards = [
-  {
-    name: 'Павловск',
-    link: 'https://images.unsplash.com/photo-1571680233390-b0061928cea0',
-  },
-  {
-    name: 'Судак',
-    link: 'https://images.unsplash.com/photo-1550399741-599433fae4d1',
-  },
-  {
-    name: 'Тула',
-    link: 'https://images.unsplash.com/photo-1545736522-b347030de513',
-  },
-  {
-    name: 'Выборг',
-    link: 'https://images.unsplash.com/photo-1536012354193-8bb300dc3ce6',
-  },
-  {
-    name: 'Микли',
-    link: 'https://images.unsplash.com/photo-1555948560-27b32a752ff3',
-  },
-  {
-    name: 'Байкал',
-    link: 'https://images.unsplash.com/photo-1490879112094-281fea0883dc',
-  },
-];
+import { closeImage, keyHandler, clickListener } from './utilits.js';
 
 class Card {
   constructor(data) {
     this._name = data.name;
     this._link = data.link;
+    this._alt = `Фотография «${data.name}»`;
   }
 
   _getTemplate() {
@@ -40,16 +16,47 @@ class Card {
     this._element = this._getTemplate();
 
     this._element.querySelector('.element__picture').src = this._link;
+    this._element.querySelector('.element__picture').alt = this._alt;
     this._element.querySelector('.element__place').textContent = this._name;
     this._trashButton = this._element.querySelector('.element__trash');
     this._likeButton = this._element.querySelector('.element__like');
+    const popupPreview = document.querySelector('.popup__preview');
+    this._closeButton = popupPreview.closest('.popup__close-button');
+    this._setEventListeners();
     return this._element;
+  }
+  _setEventListeners() {
+    this._likeButton.addEventListener('click', () => {
+      this._likeCards();
+    });
+    this._trashButton.addEventListener('click', () => {
+      this._deleteElement();
+    });
+    this._element.querySelector('.element__picture').addEventListener('click', () => {
+      this._showPopupImage();
+    });
+  }
+
+  _likeCards() {
+    this._likeButton.classList.toggle('element__like_black');
+  }
+
+  _deleteElement() {
+    this._element.remove();
+    this._element = null;
+  }
+
+  _showPopupImage() {
+    document.querySelector('.popup__image-caption').textContent = this._element.closest('.element').textContent;
+    document.querySelector('.popup__image').src = this._link;
+    document.querySelector('.popup__image').alt = this._alt;
+    document.querySelector('.popup__preview').classList.toggle('popup__preview_opened');
+    const popupPreview = document.querySelector('.popup__preview');
+    const closeButtonImg = popupPreview.querySelector('.popup__close-button');
+    closeButtonImg.addEventListener('click', closeImage);
+    document.addEventListener('keydown', keyHandler);
+    document.addEventListener('click', clickListener);
   }
 }
 
-initialCards.forEach((item) => {
-  const card = new Card(item);
-  const cardElement = card.generateCard();
-
-  document.body.append(cardElement);
-});
+export { Card };

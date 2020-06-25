@@ -12,8 +12,8 @@ class FormValidator {
 
   _handleFormInput() {
     // включаем / выключаем кнопку в зависимости от валидности формы
-    const testForm = this._formSelector.querySelector('.popup__form-container');
-    const hasErrors = !testForm.checkValidity(); //true
+    const validForm = this._formSelector.querySelector('.popup__form-container');
+    const hasErrors = !validForm.checkValidity();
     this._button.disabled = hasErrors;
     // если второй аргумент true -- добавляем, если false -- удаляем класс
     this._button.classList.toggle(this._inactiveButtonClass, hasErrors);

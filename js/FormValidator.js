@@ -31,14 +31,14 @@ class FormValidator {
     this._formSelector.addEventListener('input', () => this._handleFormInput());
   }
 
-  _isValid(input, errorText, errorBorder) {
+  _hideErrors(input, errorText, errorBorder) {
     const error = document.querySelector(`#${input.id}-error`);
     input.classList.remove(errorText);
     error.textContent = '';
     input.classList.remove(errorBorder);
   }
 
-  _notValid(input, errorText, errorBorder) {
+  _showErrors(input, errorText, errorBorder) {
     const error = document.querySelector(`#${input.id}-error`);
     input.classList.add(errorText);
     error.textContent = input.validationMessage;
@@ -48,9 +48,9 @@ class FormValidator {
   _handleInput(evt, errorText, errorBorder) {
     const input = evt.target;
     if (input.checkValidity()) {
-      this._isValid(input, errorText, errorBorder);
+      this._hideErrors(input, errorText, errorBorder);
     } else {
-      this._notValid(input, errorText, errorBorder);
+      this._showErrors(input, errorText, errorBorder);
     }
   }
   makeClear() {

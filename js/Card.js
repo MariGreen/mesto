@@ -1,14 +1,15 @@
-import { closeImage, keyHandler, clickListener } from './utilits.js';
+//import { closeImage, keyHandler, clickListener } from './utilits.js';
 
 class Card {
-  constructor(data) {
+  constructor(data, cardSelector) {
     this._name = data.name;
     this._link = data.link;
+    this._cardSelector = document.querySelector(cardSelector);
     this._alt = `Фотография «${data.name}»`;
   }
 
   _getTemplate() {
-    const cardElement = document.querySelector('.element_template').content.querySelector('.element').cloneNode(true);
+    const cardElement = this._cardSelector.content.querySelector('.element').cloneNode(true);
 
     return cardElement;
   }
@@ -59,4 +60,5 @@ class Card {
   }
 }
 
-export { Card };
+//export { Card };
+//экспорт попап-превью?

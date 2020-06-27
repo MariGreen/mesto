@@ -1,18 +1,19 @@
 class FormValidator {
   constructor(data, formName) {
     // Конструктор с массивом селекторов и элементом конкретной формы
-    this._formSelector = formName;
+    this._formName = formName;
+    this._formSelector = data.formSelector;
     this._inputSelector = data.inputSelector;
     this._submitButtonSelector = data.submitButtonSelector;
     this._inactiveButtonClass = data.inactiveButtonClass;
     this._inputErrorClass = data.inputErrorClass;
     this._errorClass = data.errorClass;
-    this._button = this._formSelector.querySelector(data.submitButtonSelector);
+    this._button = this._formName.querySelector(data.submitButtonSelector);
   }
 
   _handleFormInput() {
     // включаем / выключаем кнопку в зависимости от валидности формы
-    const validForm = this._formSelector.querySelector('.popup__form-container');
+    const validForm = this._formName.querySelector(this._formSelector);
     const hasErrors = !validForm.checkValidity();
     this._button.disabled = hasErrors;
     // если второй аргумент true -- добавляем, если false -- удаляем класс
@@ -21,21 +22,22 @@ class FormValidator {
 
   enableValidation() {
     // находим в форме все поля ввода
-    const inputElements = Array.from(this._formSelector.querySelectorAll(this._inputSelector));
+    const inputElements = Array.from(this._formName.querySelectorAll(this._inputSelector));
 
     inputElements.forEach((input) => {
       // в каждом проверяем валидность
       input.addEventListener('input', (e) => this._handleInput(e, this._inputErrorClass, this._errorClass));
     });
     this._handleFormInput();
-    this._formSelector.addEventListener('input', () => this._handleFormInput());
+    this._formName.addEventListener('input', () => this._handleFormInput());
   }
 
-  _hideErrors(input, errorText, errorBorder) {
+  hideErrors(input, errorText, errorBorder) {
     const error = document.querySelector(`#${input.id}-error`);
     input.classList.remove(errorText);
     error.textContent = '';
     input.classList.remove(errorBorder);
+    this._handleFormInput();
   }
 
   _showErrors(input, errorText, errorBorder) {
@@ -48,19 +50,10 @@ class FormValidator {
   _handleInput(evt, errorText, errorBorder) {
     const input = evt.target;
     if (input.checkValidity()) {
-      this._hideErrors(input, errorText, errorBorder);
+      this.hideErrors(input, errorText, errorBorder);
     } else {
       this._showErrors(input, errorText, errorBorder);
     }
-  }
-  makeClear() {
-    const cleanList = Array.from(this._formSelector.querySelectorAll(this._inputSelector));
-    cleanList.forEach((item) => {
-      item.classList.remove(this._inputErrorClass);
-      const error = document.querySelector(`#${item.id}-error`);
-      error.textContent = '';
-      item.classList.remove(this._errorClass);
-    });
   }
 }
 

@@ -1,102 +1,126 @@
-//import { closeFormEscape, closeByOverlayClick } from './index.js';
+import { popupProfile, popupPlace, editUser, newCardButton, obj, validatorProfile, validatorPlace } from './index.js';
 
-//закрытие попапа с картинкой
-function closeImage(evt) {
-  console.log(evt.target);
-  document.querySelector('.popup__preview').classList.remove('popup__preview_opened');
-  document.removeEventListener('keydown', keyHandler);
-  document.removeEventListener('click', clickListener);
-}
+const popupPreview = document.querySelector('.popup__preview');
 
-function keyHandler(evt) {
-  if (evt.key == 'Escape') {
-    //closeImage(evt);
-    closeFormEscape(evt);
-  }
-}
-
-function clickListener(evt) {
-  if (evt.target.classList.contains('popup__preview_opened')) {
-    closeByOverlayClick(evt);
-  }
-}
-
-function openPopup(popup, popupOpened) {
-  popup.classList.add(popupOpened);
-  document.addEventListener('keyup', closeByEsc);
-  document.addEventListener('mousedown', closeByOverlayClick);
-}
-
-function closePopup(popup, popupOpened) {
-  popup.classList.remove(popupOpened);
-  document.removeEventListener('keyup', closeByEsc);
-  document.removeEventListener('mousedown', closeByOverlayClick);
-}
-
-function closeByEsc(evt) {
-  let popup;
-  let popupOpened;
+//выбор попапа и класса
+function defineTargetForOpennEsc(evt) {
+  let popupActive = {};
   switch (evt.target) {
     case editUser:
-      popup = popupProfile;
-      popupOpened = 'popup_opened';
+      popupActive.popup = popupProfile;
+      popupActive.popupOpened = 'popup_opened';
       break;
     case newCardButton:
-      popup = popupPlace;
-      popupOpened = 'popup_opened';
+      popupActive.popup = popupPlace;
+      popupActive.popupOpened = 'popup_opened';
       break;
     default:
-      popup = document.querySelector('.popup__preview');
-      popupOpened = 'popup__preview_opened';
+      popupActive.popup = popupPreview;
+      popupActive.popupOpened = 'popup__preview_opened';
       break;
   }
-  console.log(popup);
-  console.log(popupOpened);
-  if (popup.classList.contains(popupOpened) && evt.key == 'Escape') {
-    popup.classList.remove(popupOpened);
-    removeListeners(popup);
+  return popupActive;
+}
+
+function setTarget(evt) {
+  const popupActive = defineTargetForOpennEsc(evt);
+  openPopup(popupActive.popup, popupActive.popupOpened);
+}
+
+//закрытие по оверлею
+function closeByOverlayClick(evt) {
+  const popupActive = defineTargetForClicknCross(evt);
+  if (evt.target == popupActive.popup) {
+    closePopup(popupActive.popup, popupActive.popupOpened);
   }
 }
 
-// function closeByOverlayClick(evt) {
-//   popup = evt.target.closest('.popup');
-//   popup.classList.remove('popup_opened' || 'popup__preview_opened');
-//   removeListeners(popup);
-// }
+//закрытие по ескейпу
+function closebyEscape(evt) {
+  if (evt.key == 'Escape') {
+    let popupActive = {};
+    if (evt.target.classList.contains('popup__form-item-field')) {
+      popupActive = defineTargetForClicknCross(evt);
+    } else {
+      popupActive = defineTargetForOpennEsc(evt);
+    }
+    closePopup(popupActive.popup, popupActive.popupOpened);
+  }
+}
 
-// //старое
-// //закрытие форм
-// //по клику
-// function closeFormClick(evt) {
-//   const popup = evt.target.closest('.popup');
-//   popup.classList.remove('popup_opened');
-//   removeListeners(popup);
-// }
+function defineTargetForClicknCross(evt) {
+  let popupActive = {};
 
-// //по Escape
-// function closeFormEscape(evt) {
-//   let popup;
-//   switch (evt.target) {
-//     case editUser:
-//       popup = popupProfile;
-//       break;
-//     case newCardButton:
-//       popup = popupPlace;
-//       break;
-//     default:
-//       return;
-//   }
-//   if (popup.classList.contains('popup_opened') && evt.key == 'Escape') {
-//     popup.classList.remove('popup_opened');
-//     removeListeners(popup);
-//   }
-// }
+  popupActive.popup = evt.target.closest('.popup');
+  switch (popupActive.popup) {
+    case popupProfile:
+      popupActive.popupOpened = 'popup_opened';
+      break;
+    case popupPlace:
+      popupActive.popupOpened = 'popup_opened';
+      break;
+    default:
+      popupActive.popupOpened = 'popup__preview_opened';
+      break;
+  }
+  return popupActive;
+}
 
-// //снятие слушателей
-// function removeListeners(popup) {
-//   document.removeEventListener('keydown', closeFormEscape);
-//   const closeButton = popup.querySelector('.popup__close-button');
-//   closeButton.removeEventListener('click', closeFormClick);
-// }
+//закрытие по крестику
+function closeByCross(evt) {
+  const popupActive = defineTargetForClicknCross(evt);
+  closePopup(popupActive.popup, popupActive.popupOpened);
+}
 
-//export { closeImage, keyHandler, clickListener };
+//закрытие попапа и снятие слушателей
+function closePopup(popup, popupOpened) {
+  popup.classList.remove(popupOpened);
+  document.removeEventListener('keydown', closebyEscape);
+  const closeButton = popup.querySelector('.popup__close-button');
+  closeButton.removeEventListener('mousedown', closeByCross);
+  popup.removeEventListener('mousedown', closeByOverlayClick);
+}
+
+//очистка ошибок
+function makeClear(popup) {
+  const cleanList = Array.from(popup.querySelectorAll(obj.inputSelector));
+
+  if (popup.classList.contains('popup_profile')) {
+    cleanList.forEach((input) => {
+      validatorProfile.hideErrors(input, obj.inputErrorClass, obj.errorClass);
+    });
+  } else if (popup.classList.contains('popup_place')) {
+    cleanList.forEach((input) => {
+      validatorPlace.hideErrors(input, obj.inputErrorClass, obj.errorClass);
+    });
+  }
+}
+
+//открытие попапа и навешивание слушателей
+function openPopup(popup, popupOpened) {
+  popup.classList.add(popupOpened);
+  document.addEventListener('keydown', closebyEscape);
+  const closeButton = popup.querySelector('.popup__close-button');
+  closeButton.addEventListener('mousedown', closeByCross);
+  const input = popup.querySelectorAll(obj.inputSelector);
+  input.forEach((element) => {
+    element.addEventListener('keydown', closebyEscape);
+  });
+  popup.addEventListener('mousedown', closeByOverlayClick);
+  makeClear(popup);
+}
+
+export {
+  closeByOverlayClick,
+  closebyEscape,
+  defineTargetForOpennEsc,
+  defineTargetForClicknCross,
+  setTarget,
+  closeByCross,
+  closePopup,
+  makeClear,
+};
+
+//из-за того, что попапы с формой и превью картинки отличаются коэффициентом прозрачности фона,
+//не удалось всё свести к простому toggle popup_opened
+//поэтому так)

@@ -1,4 +1,4 @@
-//import { closeImage, keyHandler, clickListener } from './utilits.js';
+import { closeByCross, closebyEscape, closeByOverlayClick } from './utilits.js';
 
 class Card {
   constructor(data, cardSelector) {
@@ -54,11 +54,10 @@ class Card {
     document.querySelector('.popup__preview').classList.toggle('popup__preview_opened');
     const popupPreview = document.querySelector('.popup__preview');
     const closeButtonImg = popupPreview.querySelector('.popup__close-button');
-    closeButtonImg.addEventListener('click', closeImage);
-    document.addEventListener('keydown', keyHandler);
-    document.addEventListener('click', clickListener);
+    closeButtonImg.addEventListener('mousedown', closeByCross);
+    document.addEventListener('keydown', closebyEscape);
+    popupPreview.addEventListener('mousedown', closeByOverlayClick);
   }
 }
 
-//export { Card };
-//экспорт попап-превью?
+export { Card };

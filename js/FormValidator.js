@@ -32,7 +32,7 @@ class FormValidator {
     this._formName.addEventListener('input', () => this._handleFormInput());
   }
 
-  hideErrors(input, errorText, errorBorder) {
+  _hideErrors(input, errorText, errorBorder) {
     const error = document.querySelector(`#${input.id}-error`);
     input.classList.remove(errorText);
     error.textContent = '';
@@ -50,10 +50,16 @@ class FormValidator {
   _handleInput(evt, errorText, errorBorder) {
     const input = evt.target;
     if (input.checkValidity()) {
-      this.hideErrors(input, errorText, errorBorder);
+      this._hideErrors(input, errorText, errorBorder);
     } else {
       this._showErrors(input, errorText, errorBorder);
     }
+  }
+  makeClear() {
+    const cleanList = Array.from(this._formName.querySelectorAll(this._inputSelector));
+    cleanList.forEach((item) => {
+      this._hideErrors(item, this._inputErrorClass, this._errorClass);
+    });
   }
 }
 

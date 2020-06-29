@@ -51,7 +51,7 @@ class Card {
     document.querySelector('.popup__image-caption').textContent = this._element.closest('.element').textContent;
     document.querySelector('.popup__image').src = this._link;
     document.querySelector('.popup__image').alt = this._alt;
-    document.querySelector('.popup__preview').classList.toggle('popup__preview_opened');
+    document.querySelector('.popup__preview').classList.toggle('popup_opened');
     const popupPreview = document.querySelector('.popup__preview');
     const closeButtonImg = popupPreview.querySelector('.popup__close-button');
     closeButtonImg.addEventListener('mousedown', closeByCross);

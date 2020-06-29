@@ -1,7 +1,7 @@
 import { initialCards } from './inititialCards.js';
 import { Card } from './Card.js';
 import { FormValidator } from './FormValidator.js';
-import { setTarget, closePopup } from './utilits.js';
+import { openPopup, closePopup } from './utilits.js';
 
 const obj = {
   formSelector: '.popup__form-container',
@@ -67,7 +67,7 @@ function saveProfile() {
 function formProlileSubmitHandler(evt) {
   evt.preventDefault();
   saveProfile();
-  closePopup(popupProfile, 'popup_opened');
+  closePopup(popupProfile);
 }
 
 function formPlaceSubmitHandler(evt) {
@@ -79,24 +79,24 @@ function formPlaceSubmitHandler(evt) {
   const card = new Card(newCard, '.element_template');
   const cardElement = card.generateCard();
   elements.prepend(cardElement);
-  closePopup(popupPlace, 'popup_opened');
+  closePopup(popupPlace);
 }
 
 //редактирование профиля
-editUser.addEventListener('click', (evt) => {
+editUser.addEventListener('click', () => {
   getNameAndVocation();
-  setTarget(evt);
+  validatorProfile.makeClear(obj, popupProfile);
+  openPopup(popupProfile);
 });
 
 //добавление картинки
-newCardButton.addEventListener('click', (evt) => {
+newCardButton.addEventListener('click', () => {
   setPlaceAndLink();
-  setTarget(evt);
+  validatorPlace.makeClear(obj, popupPlace);
+  openPopup(popupPlace);
 });
 
 // Прикрепляем обработчик к форме:
 // он будет следить за событием “submit” - «отправка»
 formProfile.addEventListener('submit', formProlileSubmitHandler);
 formPlace.addEventListener('submit', formPlaceSubmitHandler);
-
-export { popupProfile, popupPlace, editUser, newCardButton, obj, validatorProfile, validatorPlace };

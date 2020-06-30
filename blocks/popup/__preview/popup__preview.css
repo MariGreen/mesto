@@ -16,7 +16,7 @@
   transition: height 0ms 400ms, opacity 400ms 0ms;
 }
 
-.popup__preview .popup__preview_opened {
+.popup__preview .popup_opened {
   display: flex;
   visibility: visible;
   height: auto;

@@ -37,7 +37,7 @@ class FormValidator {
     input.classList.remove(errorText);
     error.textContent = '';
     input.classList.remove(errorBorder);
-    this._handleFormInput();
+    // this._handleFormInput();
   }
 
   _showErrors(input, errorText, errorBorder) {
@@ -60,6 +60,7 @@ class FormValidator {
     cleanList.forEach((item) => {
       this._hideErrors(item, this._inputErrorClass, this._errorClass);
     });
+    this._handleFormInput();
   }
 }
 

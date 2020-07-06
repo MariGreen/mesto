@@ -2,6 +2,7 @@ import { initialCards } from './inititialCards.js';
 import { Card } from './Card.js';
 import { FormValidator } from './FormValidator.js';
 import { openPopup, closePopup } from './utilits.js';
+import { Section } from './Section.js';
 
 const obj = {
   formSelector: '.popup__form-container',
@@ -12,7 +13,7 @@ const obj = {
   errorClass: 'popup__form-item-field_error',
 };
 
-const elements = document.querySelector('.elements');
+//const elements = document.querySelector('.elements');
 const popupPlaceName = document.querySelector('.popup__form-item-field_place');
 const popupPlaceLink = document.querySelector('.popup__form-item-field_link');
 const popupProfile = document.querySelector('.popup_profile');
@@ -22,12 +23,6 @@ const validatorProfile = new FormValidator(obj, popupProfile);
 const validatorPlace = new FormValidator(obj, popupPlace);
 validatorProfile.enableValidation(obj, popupProfile);
 validatorPlace.enableValidation(obj, popupPlace);
-
-initialCards.forEach((item) => {
-  const card = new Card(item, '.element_template');
-  const cardElement = card.generateCard();
-  elements.append(cardElement);
-});
 
 //popups values
 const profileName = document.querySelector('.profile__name');
@@ -43,6 +38,21 @@ const editUser = document.querySelector('.profile__edit-button');
 
 //cards
 const newCardButton = document.querySelector('.profile__add-button');
+
+//section
+const elements = new Section(
+  {
+    items: initialCards, //массив с карточками
+    renderer: (item) => {
+      const card = new Card(item, '.element_template');
+      const cardElement = card.generateCard();
+      return cardElement;
+    },
+  },
+  '.elements'
+);
+
+elements.renderItems();
 
 function getNameAndVocation() {
   popupProfileName.value = profileName.textContent;
@@ -72,13 +82,15 @@ function formProlileSubmitHandler(evt) {
 
 function formPlaceSubmitHandler(evt) {
   evt.preventDefault();
+
   const newCard = {
     name: popupPlaceName.value,
     link: popupPlaceLink.value,
   };
+
   const card = new Card(newCard, '.element_template');
   const cardElement = card.generateCard();
-  elements.prepend(cardElement);
+  elements.addItem(cardElement);
   closePopup(popupPlace);
 }
 

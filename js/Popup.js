@@ -7,13 +7,13 @@ class Popup {
     //this._popupSelector = popupSelector; или так?
   }
 
-  open(popupOpened) {
-    this._popupSelector.classList.add(popupOpened);
+  open() {
+    this._popupSelector.classList.add('popup_opened');
     this.setEventListeners();
   }
 
-  close(popupOpened) {
-    this._popupSelector.classList.remove(popupOpened);
+  close() {
+    this._popupSelector.classList.remove('popup_opened');
     //удаление слушателей??
     // document.removeEventListener('keydown', closebyEscape);
     // const closeButton = popup.querySelector('.popup__close-button');
@@ -34,76 +34,73 @@ class Popup {
     }
   }
 
-  setEventListeners(popupCloseButton) {
-    this._closeButton = this._popupSelector.querySelector(popupCloseButton);
+  setEventListeners() {
+    this._closeButton = this._popupSelector.querySelector('.popup__close-button');
     this._closeButton.addEventListener('mousedown', () => {
       this.close();
     });
-    //this._image = this._popupElement.querySelector('.popup__close-button'); а смысл?
-
-    //this._popupSelector.addEventListener('click', () => this.close());
-    //this._closeIcon = this._popupSelector.querySelector('.popup__close-icon');
-    //this._closeIcon.addEventListener('click', () => this.close());
+    document.addEventListener('keydown', (evt) => {
+      this._handleEscClose(evt);
+    });
+    this._popupSelector.addEventListener('mousedown', (evt) => {
+      this._closeByOverlayClick(evt);
+    });
   }
 }
 
-class PopupWithImage extends Popup {
-  constructor(popupSelector, newCard) {
+export class PopupWithImage extends Popup {
+  constructor(popupSelector) {
     super(popupSelector);
-    this._cardName = newCard.name;
-    this._cardLink = newCard.link;
   }
-  open() {
+  open(newCard) {
     super.open();
-    this._popupSelector.querySelector('.popup__image-caption').textContent = this._cardName;
-    this._popupSelector.querySelector('.popup__image').src = this._cardLink;
-    this._popupSelector.querySelector('.popup__image').alt = this._cardName;
+    this._popupSelector.querySelector('.popup__image-caption').textContent = newCard.name;
+    this._popupSelector.querySelector('.popup__image').src = newCard.link;
+    this._popupSelector.querySelector('.popup__image').alt = newCard.name;
   }
 }
 
-class PopupWithForm extends Popup {
-  constructor(popupSelector, { submitCallback }) {
+export class PopupWithForm extends Popup {
+  constructor(popupSelector, formSubmitHandler) {
+    //переключатель кнопки?
     super(popupSelector);
-    this._submitCallback = submitCallback;
-    this._formElement = this._popupElement.querySelector('.popup__form-container');
+    this._formSubmitHandler = formSubmitHandler;
+    this._formElement = this._popupSelector.querySelector('.popup__form-container');
     this._popupInputs = this._formElement.querySelectorAll('.popup__form-item-field');
   }
 
   _getInputValues() {
     //собирает данные полей с формы
-    this._inputList = this._popupSelector.querySelector('.popup__form').querySelectorAll('.popup__form-input');
+    //this._inputList = this._popupSelector.querySelector('.popup__form-container').querySelectorAll('.popup__form-item-field');
     this._formValues = {};
-    this._inputList.forEach((input) => {
+    this._popupInputs.forEach((input) => {
       this._formValues[input.name] = input.value;
     });
     return this._formValues;
   }
 
   setEventListeners() {
-    //должен не только добавлять обработчик клика иконке закрытия, но и добавлять обработчик сабмита формы.
-    this._popupSelector.querySelector(closeButtonSelector).addEventListener('click', () => {
-      this.close();
-    });
-    this._popupSelector.addEventListener('click', (e) => {
-      if (e.target.classList.contains('popup_opened')) {
-        this.close();
-      }
-    });
+    super.setEventListeners();
+
     this._popupSelector.addEventListener('submit', (evt) => {
-      //ОБРАБОТКА САБМИТА
       evt.preventDefault();
-      this._submit(this._getInputValues());
+      this._formSubmitHandler(this._getInputValues());
     });
   }
 
+  // open() {
+  //   super.open();
+  //   //сброс валидации?
+  // }
+
   close() {
-    this._popupSelector.classList.remove('popup_opened');
-    document.removeEventListener('keydown', (evt) => {
-      this._handleEscClose(evt);
-    });
-    this._popupSelector.querySelector('.popup__form').reset(); //СБРОС
+    super.close();
+    //this._popupSelector.classList.remove('popup_opened');
+    // document.removeEventListener('keydown', (evt) => {
+    //   this._handleEscClose(evt);
+    // });
+    this._formElement.reset();
   }
 }
 
 //Для каждого попапа создавайте свой экземпляр класса PopupWithForm.
-//Свяжите класс Card c попапом. Сделайте так, чтобы Card принимал в конструктор функцию handleCardClick. Эта функция должна открывать попап с картинкой при клике на карточку.

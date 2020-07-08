@@ -1,8 +1,9 @@
 import { initialCards } from './inititialCards.js';
 import { Card } from './Card.js';
 import { FormValidator } from './FormValidator.js';
-import { openPopup, closePopup } from './utilits.js';
+//import { openPopup, closePopup } from './utilits.js';
 import { Section } from './Section.js';
+import { PopupWithImage, PopupWithForm } from './Popup.js';
 
 const obj = {
   formSelector: '.popup__form-container',
@@ -39,12 +40,20 @@ const editUser = document.querySelector('.profile__edit-button');
 //cards
 const newCardButton = document.querySelector('.profile__add-button');
 
+const popupImage = new PopupWithImage('.popup__preview');
+//const popupNewPlace = new PopupWithForm('.popup_place');
+//const popupNewProfile = new PopupWithForm('.popup_profile');
+
 //section
 const elements = new Section(
   {
-    items: initialCards, //массив с карточками
+    items: initialCards,
     renderer: (item) => {
-      const card = new Card(item, '.element_template');
+      const card = new Card(item, '.element_template', {
+        handleCardClick: () => {
+          popupImage.open(item);
+        },
+      });
       const cardElement = card.generateCard();
       return cardElement;
     },
@@ -53,6 +62,20 @@ const elements = new Section(
 );
 
 elements.renderItems();
+
+//popup with forms
+const popupNewPlace = new PopupWithForm('.popup_place', {
+  formSubmitHandler() {
+    const newCard = this._getInputValues();
+    const card = new Card(newCard, '.element_template', {
+      handleCardClick: () => {
+        popupImage.open(newCard);
+      },
+    });
+    const cardElement = card.generateCard();
+    return cardElement;
+  },
+});
 
 function getNameAndVocation() {
   popupProfileName.value = profileName.textContent;
@@ -88,10 +111,14 @@ function formPlaceSubmitHandler(evt) {
     link: popupPlaceLink.value,
   };
 
-  const card = new Card(newCard, '.element_template');
+  const card = new Card(newCard, '.element_template', {
+    handleCardClick: () => {
+      popupImage.open(newCard);
+    },
+  });
   const cardElement = card.generateCard();
   elements.addItem(cardElement);
-  closePopup(popupPlace);
+  closePopup(popupPlace); //переделать потом
 }
 
 //редактирование профиля
@@ -103,12 +130,13 @@ editUser.addEventListener('click', () => {
 
 //добавление картинки
 newCardButton.addEventListener('click', () => {
-  setPlaceAndLink();
-  validatorPlace.makeClear(obj, popupPlace);
-  openPopup(popupPlace);
+  //setPlaceAndLink();
+  //validatorPlace.makeClear(obj, popupPlace);
+  //openPopup(popupPlace);
+  popupNewPlace.open();
 });
 
 // Прикрепляем обработчик к форме:
 // он будет следить за событием “submit” - «отправка»
 formProfile.addEventListener('submit', formProlileSubmitHandler);
-formPlace.addEventListener('submit', formPlaceSubmitHandler);
+//formPlace.addEventListener('submit', formPlaceSubmitHandler);

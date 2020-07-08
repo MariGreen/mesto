@@ -1,11 +1,12 @@
 import { closeByCross, closebyEscape, closeByOverlayClick } from './utilits.js';
 
 class Card {
-  constructor(data, cardSelector) {
+  constructor(data, cardSelector, { handleCardClick }) {
     this._name = data.name;
     this._link = data.link;
     this._cardSelector = document.querySelector(cardSelector);
     this._alt = `Фотография «${data.name}»`;
+    this._handleCardClick = handleCardClick;
   }
 
   _getTemplate() {
@@ -34,7 +35,8 @@ class Card {
       this._deleteElement();
     });
     this._element.querySelector('.element__picture').addEventListener('click', () => {
-      this._showPopupImage();
+      //this._showPopupImage(); //здесь нужен вызов handleCardClick
+      this._handleCardClick(); //здесь нужен вызов handleCardClick
     });
   }
 
@@ -47,17 +49,18 @@ class Card {
     this._element = null;
   }
 
-  _showPopupImage() {
-    document.querySelector('.popup__image-caption').textContent = this._element.closest('.element').textContent;
-    document.querySelector('.popup__image').src = this._link;
-    document.querySelector('.popup__image').alt = this._alt;
-    document.querySelector('.popup__preview').classList.toggle('popup_opened');
-    const popupPreview = document.querySelector('.popup__preview');
-    const closeButtonImg = popupPreview.querySelector('.popup__close-button');
-    closeButtonImg.addEventListener('mousedown', closeByCross);
-    document.addEventListener('keydown', closebyEscape);
-    popupPreview.addEventListener('mousedown', closeByOverlayClick);
-  }
+  // _showPopupImage() {
+  // _handleCardClick() {
+  //   document.querySelector('.popup__image-caption').textContent = this._element.closest('.element').textContent;
+  //   document.querySelector('.popup__image').src = this._link;
+  //   document.querySelector('.popup__image').alt = this._alt;
+  //   document.querySelector('.popup__preview').classList.toggle('popup_opened');
+  //   const popupPreview = document.querySelector('.popup__preview');
+  //   const closeButtonImg = popupPreview.querySelector('.popup__close-button');
+  //   closeButtonImg.addEventListener('mousedown', closeByCross);
+  //   document.addEventListener('keydown', closebyEscape);
+  //   popupPreview.addEventListener('mousedown', closeByOverlayClick);
+  // }
 }
 
 export { Card };

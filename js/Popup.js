@@ -1,15 +1,10 @@
-//import { closeByCross } from './utilits.js';
-//Popup никак не нужно связывать с index.js, нужно наследующие от него классы PopupWithImage и PopupWithForm. создать их экземпляры и вызывать на них setEventListeners; в конструктор Card передать в качечтве коллбэка () => imagePopup.open(cardData), в обработчики кликов на кнопки — open других попапов...
-
 class Popup {
   constructor(popupSelector) {
-    this._popupSelector = document.querySelector(popupSelector); //почему не '.popup_opened'?
-    //this._popupSelector = popupSelector; или так?
+    this._popupSelector = document.querySelector(popupSelector);
   }
 
   open() {
     this._popupSelector.classList.add('popup_opened');
-    this.setEventListeners();
   }
 
   close() {
@@ -61,10 +56,11 @@ export class PopupWithImage extends Popup {
 }
 
 export class PopupWithForm extends Popup {
-  constructor(popupSelector, formSubmitHandler) {
-    //переключатель кнопки?
+  constructor(popupSelector, { formSubmitHandler }) {
+    // { makeClear }
     super(popupSelector);
     this._formSubmitHandler = formSubmitHandler;
+    //this._makeClear = makeClear;
     this._formElement = this._popupSelector.querySelector('.popup__form-container');
     this._popupInputs = this._formElement.querySelectorAll('.popup__form-item-field');
   }
@@ -76,21 +72,24 @@ export class PopupWithForm extends Popup {
     this._popupInputs.forEach((input) => {
       this._formValues[input.name] = input.value;
     });
+
     return this._formValues;
   }
 
   setEventListeners() {
     super.setEventListeners();
-
     this._popupSelector.addEventListener('submit', (evt) => {
       evt.preventDefault();
+
       this._formSubmitHandler(this._getInputValues());
+
+      this.close();
     });
   }
 
   // open() {
   //   super.open();
-  //   //сброс валидации?
+  //   this._makeClear();
   // }
 
   close() {

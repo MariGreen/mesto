@@ -1,38 +1,24 @@
-class UserInfo {
-  constructor({ profileName, profileInfo }) {
-    this._profileName = document.querySelector(profileName);
-    this._profileInfo = document.querySelector(profileInfo);
+export class UserInfo {
+  //Принимает в конструктор объект с селекторами двух элементов: элемента имени пользователя и элемента информации о себе.
+  constructor(name, vocation) {
+    this._name = document.querySelector(name);
+    this._vocation = document.querySelector(vocation);
   }
 
   getUserInfo() {
-    this.profileInfoObj = {};
-    this.profileInfoObj.name = this._profileName.textContent;
-    this.profileInfoObj.info = this._profileInfo.textContent;
-    return this.profileInfoObj;
+    //Содержит публичный метод getUserInfo, который возвращает объект с данными пользователя. Этот метод пригодится когда данные пользователя нужно будет подставить в форму при открытии.
+    const person = {};
+    person.name = this._name.textContent;
+    person.vocation = this._vocation.textContent;
+    return person;
   }
 
-  setUserInfo(obj) {
-    this._profileName.textContent = obj.name;
-    this._profileInfo.textContent = obj.about;
+  setUserInfo(person) {
+    //Содержит публичный метод setUserInfo, который принимает новые данные пользователя и добавляет их на страницу.
+
+    this._name.textContent = person.name;
+    this._vocation.textContent = person.vocation;
   }
 }
-
-// ---------------------Редактирование профиля------------------------
-const popupOpenButton = document.querySelector('.profile__edit-button');
-const name = document.querySelector('.profile__author');
-const job = document.querySelector('.profile__description');
-const nameInput = document.querySelector('#name-input');
-const jobInput = document.querySelector('#job-input');
-const profileForm = document.querySelector('.popup__form_profile');
-
-const userInfo = new UserInfo('.profile__author', '.profile__description'); //деструктуризация?
-const profileSubmit = new PopupWithForm('.popup_type_profile', (values) => {
-  userInfo.setUserInfo(values);
-  profileSubmit.close();
-});
-
-profileSubmit.setEventListeners('.popup__close-icon_profile');
-
-popupOpenButton.addEventListener('click', () => {
-  profileSubmit.open();
-});
+//то есть при сабмите формы мы должны передавать данные из инпутов в метод setUserInfo?
+//при сабмите формы редактирования профиля - да, коллбэком будет setUserInfo

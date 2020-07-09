@@ -4,6 +4,7 @@ import { FormValidator } from './FormValidator.js';
 //import { openPopup, closePopup } from './utilits.js';
 import { Section } from './Section.js';
 import { PopupWithImage, PopupWithForm } from './Popup.js';
+import { UserInfo } from './UserInfo.js';
 
 const obj = {
   formSelector: '.popup__form-container',
@@ -40,9 +41,10 @@ const editUser = document.querySelector('.profile__edit-button');
 //cards
 const newCardButton = document.querySelector('.profile__add-button');
 
+const newUser = new UserInfo('.profile__name', '.profile__vocation');
+
 const popupImage = new PopupWithImage('.popup__preview');
-//const popupNewPlace = new PopupWithForm('.popup_place');
-//const popupNewProfile = new PopupWithForm('.popup_profile');
+popupImage.setEventListeners();
 
 //section
 const elements = new Section(
@@ -73,70 +75,29 @@ const popupNewPlace = new PopupWithForm('.popup_place', {
       },
     });
     const cardElement = card.generateCard();
+
+    elements.addItem(cardElement);
     return cardElement;
   },
 });
+popupNewPlace.setEventListeners();
 
-function getNameAndVocation() {
-  popupProfileName.value = profileName.textContent;
-  popupProfileVocation.value = profileVocation.textContent;
-}
-
-function setPlaceAndLink() {
-  popupPlaceName.value = '';
-  popupPlaceLink.value = '';
-}
-
-function saveProfile() {
-  // Получите значение полей из свойства value
-  const newName = popupProfileName.value;
-  const newJob = popupProfileVocation.value;
-  // Вставьте новые значения с помощью textContent
-  profileVocation.textContent = newJob;
-  profileName.textContent = newName;
-}
-
-// Обработчики «отправки» формы
-function formProlileSubmitHandler(evt) {
-  evt.preventDefault();
-  saveProfile();
-  closePopup(popupProfile);
-}
-
-function formPlaceSubmitHandler(evt) {
-  evt.preventDefault();
-
-  const newCard = {
-    name: popupPlaceName.value,
-    link: popupPlaceLink.value,
-  };
-
-  const card = new Card(newCard, '.element_template', {
-    handleCardClick: () => {
-      popupImage.open(newCard);
-    },
-  });
-  const cardElement = card.generateCard();
-  elements.addItem(cardElement);
-  closePopup(popupPlace); //переделать потом
-}
+const newPopupProfile = new PopupWithForm('.popup_profile', {
+  formSubmitHandler(person) {
+    newUser.setUserInfo(person);
+    //this.close();
+  }, //validatorProfile.makeClear(obj, popupProfile)
+});
+newPopupProfile.setEventListeners();
 
 //редактирование профиля
 editUser.addEventListener('click', () => {
-  getNameAndVocation();
-  validatorProfile.makeClear(obj, popupProfile);
-  openPopup(popupProfile);
+  newPopupProfile.open();
+  popupProfileName.value = newUser.getUserInfo().name;
+  popupProfileVocation.value = newUser.getUserInfo().vocation;
 });
 
 //добавление картинки
 newCardButton.addEventListener('click', () => {
-  //setPlaceAndLink();
-  //validatorPlace.makeClear(obj, popupPlace);
-  //openPopup(popupPlace);
   popupNewPlace.open();
 });
-
-// Прикрепляем обработчик к форме:
-// он будет следить за событием “submit” - «отправка»
-formProfile.addEventListener('submit', formProlileSubmitHandler);
-//formPlace.addEventListener('submit', formPlaceSubmitHandler);

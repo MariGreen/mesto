@@ -16,6 +16,7 @@ class FormValidator {
     const validForm = this._formName.querySelector(this._formSelector);
     const hasErrors = !validForm.checkValidity();
     this._button.disabled = hasErrors;
+
     // если второй аргумент true -- добавляем, если false -- удаляем класс
     this._button.classList.toggle(this._inactiveButtonClass, hasErrors);
   }
@@ -37,7 +38,6 @@ class FormValidator {
     input.classList.remove(errorText);
     error.textContent = '';
     input.classList.remove(errorBorder);
-    // this._handleFormInput();
   }
 
   _showErrors(input, errorText, errorBorder) {

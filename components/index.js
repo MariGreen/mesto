@@ -1,9 +1,9 @@
 import { initialCards } from './inititialCards.js';
 import { Card } from './Card.js';
 import { FormValidator } from './FormValidator.js';
-//import { openPopup, closePopup } from './utilits.js';
 import { Section } from './Section.js';
-import { PopupWithImage, PopupWithForm } from './Popup.js';
+import { PopupWithForm } from './PopupWithForm.js';
+import { PopupWithImage } from './PopupWithImage.js';
 import { UserInfo } from './UserInfo.js';
 
 const obj = {
@@ -15,36 +15,16 @@ const obj = {
   errorClass: 'popup__form-item-field_error',
 };
 
-//const elements = document.querySelector('.elements');
-const popupPlaceName = document.querySelector('.popup__form-item-field_place');
-const popupPlaceLink = document.querySelector('.popup__form-item-field_link');
 const popupProfile = document.querySelector('.popup_profile');
 const popupPlace = document.querySelector('.popup_place');
 
-const validatorProfile = new FormValidator(obj, popupProfile);
-const validatorPlace = new FormValidator(obj, popupPlace);
-validatorProfile.enableValidation(obj, popupProfile);
-validatorPlace.enableValidation(obj, popupPlace);
-
-//popups values
-const profileName = document.querySelector('.profile__name');
 const popupProfileName = document.querySelector('.popup__form-item-field_name');
-const profileVocation = document.querySelector('.profile__vocation');
 const popupProfileVocation = document.querySelector('.popup__form-item-field_vocation');
 
-//forms
-const formProfile = document.querySelector('#change-user');
-const formPlace = document.querySelector('#change-place');
-
 const editUser = document.querySelector('.profile__edit-button');
-
-//cards
 const newCardButton = document.querySelector('.profile__add-button');
 
 const newUser = new UserInfo('.profile__name', '.profile__vocation');
-
-const popupImage = new PopupWithImage('.popup__preview');
-popupImage.setEventListeners();
 
 //section
 const elements = new Section(
@@ -57,6 +37,7 @@ const elements = new Section(
         },
       });
       const cardElement = card.generateCard();
+
       return cardElement;
     },
   },
@@ -65,7 +46,12 @@ const elements = new Section(
 
 elements.renderItems();
 
+//popup with image
+const popupImage = new PopupWithImage('.popup__preview');
+popupImage.setEventListeners();
+
 //popup with forms
+//place
 const popupNewPlace = new PopupWithForm('.popup_place', {
   formSubmitHandler() {
     const newCard = this._getInputValues();
@@ -77,27 +63,37 @@ const popupNewPlace = new PopupWithForm('.popup_place', {
     const cardElement = card.generateCard();
 
     elements.addItem(cardElement);
+
     return cardElement;
   },
 });
 popupNewPlace.setEventListeners();
 
+//user
 const newPopupProfile = new PopupWithForm('.popup_profile', {
   formSubmitHandler(person) {
     newUser.setUserInfo(person);
-    //this.close();
-  }, //validatorProfile.makeClear(obj, popupProfile)
+  },
 });
+
 newPopupProfile.setEventListeners();
+
+//валидация форм
+const validatorProfile = new FormValidator(obj, popupProfile);
+const validatorPlace = new FormValidator(obj, popupPlace);
+validatorProfile.enableValidation();
+validatorPlace.enableValidation();
 
 //редактирование профиля
 editUser.addEventListener('click', () => {
-  newPopupProfile.open();
   popupProfileName.value = newUser.getUserInfo().name;
   popupProfileVocation.value = newUser.getUserInfo().vocation;
+  validatorProfile.makeClear();
+  newPopupProfile.open();
 });
 
 //добавление картинки
 newCardButton.addEventListener('click', () => {
+  validatorPlace.makeClear();
   popupNewPlace.open();
 });

@@ -6,7 +6,7 @@
 
 **Технологии**
 
-HTML5, CSS, JS, Webpack
+HTML5, CSS, JS, WebPack
 
 **Ссылка**
 

@@ -54,18 +54,15 @@ popupImage.setEventListeners();
 //popup with forms
 //place
 const popupNewPlace = new PopupWithForm('.popup_place', {
-  formSubmitHandler() {
-    const newCard = this._getInputValues();
-    const card = new Card(newCard, '.element_template', {
+  formSubmitHandler(data) {
+    const card = new Card(data, '.element_template', {
       handleCardClick: () => {
-        popupImage.open(newCard);
+        popupImage.open(data);
       },
     });
     const cardElement = card.generateCard();
 
     elements.addItem(cardElement);
-
-    return cardElement;
   },
 });
 popupNewPlace.setEventListeners();

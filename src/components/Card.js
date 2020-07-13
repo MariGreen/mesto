@@ -15,8 +15,9 @@ class Card {
   generateCard() {
     this._element = this._getTemplate();
 
-    this._element.querySelector('.element__picture').src = this._link;
-    this._element.querySelector('.element__picture').alt = this._alt;
+    const elementPicture = this._element.querySelector('.element__picture');
+    elementPicture.src = this._link;
+    elementPicture.alt = this._alt;
     this._element.querySelector('.element__place').textContent = this._place;
     this._trashButton = this._element.querySelector('.element__trash');
     this._likeButton = this._element.querySelector('.element__like');

@@ -11,7 +11,7 @@ class FormValidator {
     this._button = this._formName.querySelector(data.submitButtonSelector);
   }
 
-  _handleFormInput() {
+  _handleButtonState() {
     // включаем / выключаем кнопку в зависимости от валидности формы
     const validForm = this._formName.querySelector(this._formSelector);
     const hasErrors = !validForm.checkValidity();
@@ -29,8 +29,8 @@ class FormValidator {
       // в каждом проверяем валидность
       input.addEventListener('input', (e) => this._handleInput(e, this._inputErrorClass, this._errorClass));
     });
-    this._handleFormInput();
-    this._formName.addEventListener('input', () => this._handleFormInput());
+    this._handleButtonState();
+    this._formName.addEventListener('input', () => this._handleButtonState());
   }
 
   _hideErrors(input, errorText, errorBorder) {
@@ -60,7 +60,7 @@ class FormValidator {
     cleanList.forEach((item) => {
       this._hideErrors(item, this._inputErrorClass, this._errorClass);
     });
-    this._handleFormInput();
+    this._handleButtonState();
   }
 }
 

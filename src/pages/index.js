@@ -1,26 +1,12 @@
 import './index.css';
-import { initialCards } from '../components/inititialCards.js';
+import { initialCards } from '../components/data/inititialCards.js';
+import { popupProfile, popupPlace, popupProfileName, popupProfileVocation, obj } from '../components/data/constants.js';
 import { Card } from '../components/Card.js';
 import { FormValidator } from '../components/FormValidator.js';
 import { Section } from '../components/Section.js';
 import { PopupWithForm } from '../components/PopupWithForm.js';
 import { PopupWithImage } from '../components/PopupWithImage.js';
 import { UserInfo } from '../components/UserInfo.js';
-
-const obj = {
-  formSelector: '.popup__form-container',
-  inputSelector: '.popup__form-item-field',
-  submitButtonSelector: '.popup__save-button',
-  inactiveButtonClass: 'popup__save-button_inactiv',
-  inputErrorClass: 'popup__input_type_error',
-  errorClass: 'popup__form-item-field_error',
-};
-
-const popupProfile = document.querySelector('.popup_profile');
-const popupPlace = document.querySelector('.popup_place');
-
-const popupProfileName = document.querySelector('.popup__form-item-field_name');
-const popupProfileVocation = document.querySelector('.popup__form-item-field_vocation');
 
 const editUser = document.querySelector('.profile__edit-button');
 const newCardButton = document.querySelector('.profile__add-button');

@@ -3,7 +3,7 @@
   border-color: inherit;
   width: 100%;
   padding: 0;
-  margin: 0;
+  margin: 54px 0px 0px;
   box-sizing: border-box;
   background-color: transparent;
   text-align: start;
@@ -19,5 +19,6 @@
   .popup__form-item {
     font-size: 12px;
     line-height: 1.25;
+    margin: 36px 0px 0px;
   }
 }

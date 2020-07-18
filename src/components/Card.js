@@ -1,9 +1,9 @@
 class Card {
   constructor(data, cardSelector, { handleCardClick }) {
-    this._place = data.place;
+    this._place = data.name;
     this._link = data.link;
     this._cardSelector = document.querySelector(cardSelector);
-    this._alt = `Фотография «${data.place}»`;
+    this._alt = `Фотография «${data.name}»`;
     this._handleCardClick = handleCardClick;
   }
 
@@ -24,7 +24,6 @@ class Card {
     const popupPreview = document.querySelector('.popup__preview');
     this._closeButton = popupPreview.closest('.popup__close-button');
     this._setEventListeners();
-
     return this._element;
   }
   _setEventListeners() {

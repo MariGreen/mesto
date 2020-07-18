@@ -1,21 +1,24 @@
 .profile__avatar {
-  width: 120px;
-  height: 120px;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  overflow: hidden;
   border-radius: 50%;
-  margin: 42px auto 14px;  
+  margin: 0px auto 14px;
+}
+
+.profile__avatar:hover {
+  opacity: 0.2;
 }
 
 @media screen and (min-width: 630px) and (max-width: 1019px) {
   .profile__avatar {
-    grid-column: 1 / 2;
-    grid-row: 1 / 3;
-    margin: 50px auto 40px;
+    margin: 0px 0px 14px 0px;
   }
 }
 
-
-@media screen and (min-width: 1020px) {
+@media screen and (min-width: 630px) and (max-width: 1019px) {
   .profile__avatar {
-    margin: 40px 0px 50px 0px;
+    margin: 0px auto;
   }
 }

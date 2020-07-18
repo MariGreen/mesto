@@ -17,7 +17,9 @@
 
       <main class="content">
         <section class="profile">
-          <img src="../src/images/profile_photo1.jpg" alt="фото пользователя" class="profile__avatar" />
+          <div class="profile__avatar-edit">
+            <img src="../src/images/profile_photo1.jpg" alt="фото пользователя" class="profile__avatar" />
+          </div>
           <div class="profile__info">
             <h1 class="profile__name">Жан Кокто</h1>
             <button type="button" aria-label="редактировать профиль" class="profile__edit-button"></button>
@@ -35,6 +37,7 @@
     </div>
 
     <section class="popups">
+      <!--попап с профилем-->
       <div class="popup popup_profile">
         <form id="change-user" name="change-user" action="#" method="POST" class="popup__form-container" novalidate>
           <button type="button" class="popup__close-button"></button>
@@ -75,7 +78,7 @@
           <button type="submit" class="popup__save-button">Сохранить</button>
         </form>
       </div>
-
+      <!--попап новое место-->
       <div class="popup popup_place">
         <form id="change-place" name="change-place" action="#" method="POST" class="popup__form-container" novalidate>
           <button type="button" class="popup__close-button popup__close-button_place"></button>
@@ -85,7 +88,7 @@
               <input
                 id="place-input"
                 type="text"
-                name="place"
+                name="name"
                 class="popup__form-item-field popup__form-item-field_place"
                 placeholder="Название"
                 value=""
@@ -116,6 +119,40 @@
         </form>
       </div>
 
+      <!--попап аватар-->
+      <div class="popup popup_avatar">
+        <form id="change-avatar" name="change-avatar" action="#" method="POST" class="popup__form-container" novalidate>
+          <button type="button" class="popup__close-button popup__close-button_avatar"></button>
+          <h2 class="popup__title">Обновить аватар</h2>
+          <fieldset class="popup__form-item">
+            <div class="popup__form-element">
+              <input
+                id="avatar-input"
+                type="url"
+                name="avatar"
+                class="popup__form-item-field popup__form-item-field_avatar"
+                placeholder="Новая ссылка"
+                value=""
+                autocomplete="on"
+                required
+              />
+              <span id="avatar-input-error" class="popup__form-item popup__form-item_error"></span>
+            </div>
+          </fieldset>
+
+          <button type="submit" class="popup__save-button">Сохранить</button>
+        </form>
+      </div>
+
+      <!--попап удаление-->
+      <div class="popup popup_confirm">
+        <div class="popup__form-container">
+          <button type="button" class="popup__close-button popup__close-button_confirm"></button>
+          <h2 class="popup__title">Вы уверены?</h2>
+          <button type="submit" class="popup__delete-button">Да</button>
+        </div>
+      </div>
+      <!--попап с большой картинкой-->
       <div class="popup popup__preview popup_dark-background">
         <div class="popup__image-container">
           <button type="button" class="popup__close-button"></button>

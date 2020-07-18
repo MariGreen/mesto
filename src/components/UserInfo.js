@@ -4,11 +4,20 @@ export class UserInfo {
     this._vocation = document.querySelector(vocation);
   }
 
-  getUserInfo() {
+  getUserInfo(api) {
     const person = {};
-    person.name = this._name.textContent;
-    person.vocation = this._vocation.textContent;
-    return person;
+    // person.name = this._name.textContent;
+    // person.vocation = this._vocation.textContent;
+    // return person;
+    api
+      .then((data) => {
+        person.name = data.name;
+        person.vocation = data.about;
+        return person;
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   }
 
   setUserInfo(person) {

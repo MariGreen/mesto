@@ -14,25 +14,33 @@ const newCardButton = document.querySelector('.profile__add-button');
 
 //
 
-const defaultUser = {
-  baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-13/users/me',
-  method: 'GET',
+// const defaultUser = {
+//   //`${baseUrl}/users/me`
+//   baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-13/users/me',
+//   method: 'GET',
+//   headers: {
+//     authorization: 'f6237ee0-2461-4ab8-bf1b-c4683cc19aa7',
+//     'Content-Type': 'application/json',
+//   },
+// };
+// const apiDefaultUser = new Api(defaultUser);
+
+const api = new Api({
+  baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-13',
   headers: {
     authorization: 'f6237ee0-2461-4ab8-bf1b-c4683cc19aa7',
     'Content-Type': 'application/json',
   },
-};
-const apiDefaultUser = new Api(defaultUser);
+});
 
 const newUser = new UserInfo('.profile__name', '.profile__vocation');
 const name = document.querySelector('.profile__name');
 const vocation = document.querySelector('.profile__vocation');
 
-apiDefaultUser
+api
   .getDefaultUserInfo()
   .then((result) => {
     name.textContent = result.name;
-
     vocation.textContent = result.about;
     const avatar = document.querySelector('.profile__avatar');
     avatar.src = result.avatar;
@@ -41,19 +49,33 @@ apiDefaultUser
     console.log(err);
   });
 
+// apiDefaultUser
+//   .getDefaultUserInfo()
+//   .then((result) => {
+//     name.textContent = result.name;
+
+//     vocation.textContent = result.about;
+//     const avatar = document.querySelector('.profile__avatar');
+//     avatar.src = result.avatar;
+//   })
+//   .catch((err) => {
+//     console.log(err);
+//   });
+
 // const userInfo = newUser.getUserInfo(apiDefaultUser.getDefaultUserInfo());
 // console.log(userInfo);
 
-const defaultCards = {
-  baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-13/cards',
-  method: 'GET',
-  headers: {
-    authorization: 'f6237ee0-2461-4ab8-bf1b-c4683cc19aa7',
-    'Content-Type': 'application/json',
-  },
-};
+// const defaultCards = {
+//   //`${baseUrl}/cards`
+//   baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-13/cards',
+//   method: 'GET',
+//   headers: {
+//     authorization: 'f6237ee0-2461-4ab8-bf1b-c4683cc19aa7',
+//     'Content-Type': 'application/json',
+//   },
+// };
 
-const apiDefaultCards = new Api(defaultCards);
+// const apiDefaultCards = new Api(defaultCards);
 const elements = new Section(
   {
     //items: data,
@@ -71,7 +93,7 @@ const elements = new Section(
   '.elements'
 );
 
-elements.renderItems(apiDefaultCards.getInitialCards());
+elements.renderItems(api.getInitialCards());
 
 // api.getInitialCards().then((data) => {
 //   console.log(data);
@@ -120,13 +142,13 @@ popupImage.setEventListeners();
 //place
 const popupNewPlace = new PopupWithForm('.popup_place', {
   formSubmitHandler(data) {
+    api.createCard(data);
     const card = new Card(data, '.element_template', {
       handleCardClick: () => {
         popupImage.open(data);
       },
     });
     const cardElement = card.generateCard();
-
     elements.addItem(cardElement);
   },
 });
@@ -136,11 +158,14 @@ popupNewPlace.setEventListeners();
 const newPopupProfile = new PopupWithForm('.popup_profile', {
   formSubmitHandler(person) {
     newUser.setUserInfo(person);
-    apiDefaultUser.editUser(person);
+    api.editUser(person);
   },
 });
 
 newPopupProfile.setEventListeners();
+
+//подтверждение удаления
+//const popupDeleteCard = new PopupWithForm('.popup_confirm', {});
 
 //валидация форм
 const validatorProfile = new FormValidator(obj, popupProfile);

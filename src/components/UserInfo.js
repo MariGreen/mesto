@@ -13,6 +13,7 @@ export class UserInfo {
       .then((data) => {
         person.name = data.name;
         person.vocation = data.about;
+        person._id = data._id;
         return person;
       })
       .catch((err) => {

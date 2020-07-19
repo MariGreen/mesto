@@ -31,13 +31,12 @@ class Api {
   }
 
   createCard(data) {
-    //заготовки! лето!
     return fetch(`${this.baseUrl}/cards`, {
       headers: this.headers,
       method: 'POST',
       body: JSON.stringify({
         name: data.name,
-        link: data.vocation,
+        link: data.link,
       }),
     }).then((res) => {
       if (res.ok) {
@@ -56,6 +55,19 @@ class Api {
         name: data.name,
         about: data.vocation,
       }),
+    }).then((res) => {
+      if (res.ok) {
+        return res.json();
+      }
+      // если ошибка, отклоняем промис
+      return Promise.reject(`Ошибка: ${res.status}`);
+    });
+  }
+
+  likeCards(data) {
+    return fetch(`${this.baseUrl}/cards/likes/${data}`, {
+      method: 'PUT',
+      headers: this.headers,
     }).then((res) => {
       if (res.ok) {
         return res.json();

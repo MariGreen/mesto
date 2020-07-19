@@ -1,12 +1,12 @@
 import './index.css';
 import { Api } from '../components/Api.js';
-import { initialCards } from '../components/data/inititialCards.js';
 import { popupProfile, popupPlace, popupProfileName, popupProfileVocation, obj } from '../components/data/constants.js';
 import { Card } from '../components/Card.js';
 import { FormValidator } from '../components/FormValidator.js';
 import { Section } from '../components/Section.js';
 import { PopupWithForm } from '../components/PopupWithForm.js';
 import { PopupWithImage } from '../components/PopupWithImage.js';
+import { PopupWithDelete } from '../components/PopupWithDelete.js';
 import { UserInfo } from '../components/UserInfo.js';
 
 const editUser = document.querySelector('.profile__edit-button');
@@ -36,6 +36,8 @@ const api = new Api({
 const newUser = new UserInfo('.profile__name', '.profile__vocation');
 const name = document.querySelector('.profile__name');
 const vocation = document.querySelector('.profile__vocation');
+let userId = api.getDefaultUserInfo(userId);
+//console.log(userId);
 
 api
   .getDefaultUserInfo()
@@ -44,6 +46,7 @@ api
     vocation.textContent = result.about;
     const avatar = document.querySelector('.profile__avatar');
     avatar.src = result.avatar;
+    userId = result._id;
   })
   .catch((err) => {
     console.log(err);
@@ -76,15 +79,37 @@ api
 // };
 
 // const apiDefaultCards = new Api(defaultCards);
+
+//подтверждение удаления
+const popupCardDelete = new PopupWithDelete('.popup_confirm', {
+  formSubmitHandler: () => {},
+});
+popupCardDelete.setEventListeners();
+
+//начальная загрузка
 const elements = new Section(
   {
     //items: data,
     renderer: (item) => {
-      const card = new Card(item, '.element_template', {
-        handleCardClick: () => {
-          popupImage.open(item);
+      const card = new Card(
+        item,
+        '.element_template',
+        {
+          handleCardClick: () => {
+            popupImage.open(item);
+          },
         },
-      });
+        {
+          handleCardDelete: () => {
+            popupCardDelete.open();
+          },
+        },
+        {
+          handleCardLike: () => {
+            api.likeCards(item._id);
+          },
+        }
+      );
       const cardElement = card.generateCard();
 
       return cardElement;
@@ -143,11 +168,25 @@ popupImage.setEventListeners();
 const popupNewPlace = new PopupWithForm('.popup_place', {
   formSubmitHandler(data) {
     api.createCard(data);
-    const card = new Card(data, '.element_template', {
-      handleCardClick: () => {
-        popupImage.open(data);
+    const card = new Card(
+      data,
+      '.element_template',
+      {
+        handleCardClick: () => {
+          popupImage.open(data);
+        },
       },
-    });
+      {
+        handleCardDelete: () => {
+          popupCardDelete.open();
+        },
+      },
+      {
+        handleCardLike: () => {
+          api.likeCards(userId);
+        },
+      }
+    );
     const cardElement = card.generateCard();
     elements.addItem(cardElement);
   },
@@ -163,9 +202,6 @@ const newPopupProfile = new PopupWithForm('.popup_profile', {
 });
 
 newPopupProfile.setEventListeners();
-
-//подтверждение удаления
-//const popupDeleteCard = new PopupWithForm('.popup_confirm', {});
 
 //валидация форм
 const validatorProfile = new FormValidator(obj, popupProfile);

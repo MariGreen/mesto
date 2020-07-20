@@ -76,6 +76,32 @@ class Api {
       return Promise.reject(`Ошибка: ${res.status}`);
     });
   }
+
+  disLikeCards(data) {
+    return fetch(`${this.baseUrl}/cards/likes/${data}`, {
+      method: 'DELETE',
+      headers: this.headers,
+    }).then((res) => {
+      if (res.ok) {
+        return res.json();
+      }
+      // если ошибка, отклоняем промис
+      return Promise.reject(`Ошибка: ${res.status}`);
+    });
+  }
+
+  deleteCard(cardId) {
+    return fetch(`${this.baseUrl}/cards/${cardId}`, {
+      headers: this.headers,
+      method: 'DELETE',
+    }).then((res) => {
+      if (res.ok) {
+        return res.json();
+      }
+      // если ошибка, отклоняем промис
+      return Promise.reject(`Ошибка: ${res.status}`);
+    });
+  }
 }
 
 export { Api };

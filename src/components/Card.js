@@ -12,7 +12,9 @@ class Card {
     this._cardSelector = document.querySelector(cardSelector);
     this._alt = `Фотография «${data.name}»`;
     this._handleCardClick = handleCardClick;
+
     this._likes = data.likes;
+    this._likes.length = data.likes.length;
     this._idCard = data._id;
     this._owner = data.owner;
     this._userId = userId;
@@ -26,6 +28,7 @@ class Card {
 
     return cardElement;
   }
+
   generateCard() {
     this._element = this._getTemplate();
 
@@ -38,7 +41,7 @@ class Card {
     const popupPreview = document.querySelector('.popup__preview');
     this._closeButton = popupPreview.closest('.popup__close-button');
     this._showLikes();
-
+    //console.log(this._likes.length);
     this._setEventListeners();
     return this._element;
   }
@@ -57,27 +60,36 @@ class Card {
     const elementLikes = this._element.querySelector('.element__likes');
     elementLikes.textContent = this._likes.length;
 
-    const myLike = this._likes.some((like) => {
-      return this._likes._id === this._userId;
+    const myLike = this._likes.some((element) => {
+      return element._id === this._userId;
     });
+
     if (myLike) {
       this._likeButton.classList.remove('element__like_black');
     }
-    console.log(myLike);
+    //console.log(myLike);
     //this._likes.some(this._owner);
     //this._likes.some(myLike(this._owner));
   }
 
   _likeCards() {
-    //console.log(this._idCard);
-    this._handleCardLike(this._idCard);
-    this._likeButton.classList.add('element__like_black');
+    //console.log(this._idCard); id карточки
+    const elementLikes = this._element.querySelector('.element__likes');
+
+    if (this._likeButton.classList.contains('element__like_black')) {
+      const NoL = this._handleCardLike(this._idCard);
+      console.log(NoL);
+      this._likeButton.classList.remove('element__like_black');
+      //console.log(this._likes); массив лайков
+      elementLikes.textContent = this._likes.length + 1;
+    } else {
+      this._handleCardDislike(this._idCard);
+      this._likeButton.classList.add('element__like_black');
+      elementLikes.textContent = this._likes.length - 1;
+    }
   }
 
-  _dislikeCards() {
-    this._handleCardDislike(this._idCard);
-    this._likeButton.classList.remove('element__like_black');
-  }
+  _dislikeCards() {}
 
   //_deleteButtonHandler()
 

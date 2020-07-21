@@ -1,5 +1,6 @@
 const popupProfile = document.querySelector('.popup_profile');
 const popupPlace = document.querySelector('.popup_place');
+const popupAvatar = document.querySelector('.popup_avatar');
 
 const popupProfileName = document.querySelector('.popup__form-item-field_name');
 const popupProfileVocation = document.querySelector('.popup__form-item-field_vocation');
@@ -13,4 +14,4 @@ const obj = {
   errorClass: 'popup__form-item-field_error',
 };
 
-export { popupProfile, popupPlace, popupProfileName, popupProfileVocation, obj };
+export { popupProfile, popupPlace, popupAvatar, popupProfileName, popupProfileVocation, obj };

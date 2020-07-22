@@ -5,7 +5,8 @@ class Card {
     cardSelector,
     { handleCardClick },
     { handleCardLike },
-    { handleCardDislike } //{ handleCardDelete },
+    { handleCardDislike },
+    { handleCardDelete }
   ) {
     this._place = data.name;
     this._link = data.link;
@@ -17,8 +18,9 @@ class Card {
     this._likes.length = data.likes.length;
     this._idCard = data._id;
     this._owner = data.owner;
+
     this._userId = userId;
-    //this._handleCardDelete = handleCardDelete;
+    this._handleCardDelete = handleCardDelete;
     this._handleCardLike = handleCardLike;
     this._handleCardDislike = handleCardDislike;
   }
@@ -41,7 +43,7 @@ class Card {
     const popupPreview = document.querySelector('.popup__preview');
     this._closeButton = popupPreview.closest('.popup__close-button');
     this._showLikes();
-    //console.log(this._likes.length);
+    this._myCards();
     this._setEventListeners();
     return this._element;
   }
@@ -50,7 +52,7 @@ class Card {
       this._likeCards();
     });
     this._trashButton.addEventListener('click', () => {
-      this._handleCardDelete();
+      this._handleCardDelete(), { once: true };
     });
     this._element.querySelector('.element__picture').addEventListener('click', () => {
       this._handleCardClick();
@@ -67,9 +69,6 @@ class Card {
     if (myLike) {
       this._likeButton.classList.remove('element__like_black');
     }
-    //console.log(myLike);
-    //this._likes.some(this._owner);
-    //this._likes.some(myLike(this._owner));
   }
 
   _likeCards() {
@@ -77,35 +76,31 @@ class Card {
     const elementLikes = this._element.querySelector('.element__likes');
 
     if (this._likeButton.classList.contains('element__like_black')) {
-      const NoL = this._handleCardLike(this._idCard);
-      console.log(NoL);
+      this._handleCardLike(this._idCard);
+
       this._likeButton.classList.remove('element__like_black');
       //console.log(this._likes); массив лайков
-      elementLikes.textContent = this._likes.length + 1;
+      elementLikes.textContent++;
     } else {
       this._handleCardDislike(this._idCard);
       this._likeButton.classList.add('element__like_black');
-      elementLikes.textContent = this._likes.length - 1;
+      elementLikes.textContent--;
     }
   }
 
-  _dislikeCards() {}
-
   //_deleteButtonHandler()
 
-  _deleteElement() {
+  //_deleteElement()
+  _handleCardDelete() {
     this._element.remove();
     this._element = null;
-
-    // const myLike = (owner) => {
-    //   return owner._id === this._userId;
-    //   //return owner._id === this._userId; //показывает мои карточки
-    // };
-    // if (myLike(this._owner)) {
-    //   this._likeButton.classList.remove('element__like_black');
-    // }
-    // console.log(this._likes);
   }
+
+  _myCards = () => {
+    if (this._owner._id != this._userId) {
+      this._trashButton.style.display = 'none';
+    }
+  };
 }
 
 export { Card };

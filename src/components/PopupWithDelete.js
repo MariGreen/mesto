@@ -15,6 +15,7 @@ export class PopupWithDelete extends Popup {
       evt.preventDefault();
 
       //this._formSubmitHandler(this._getInputValues());
+      this._formSubmitHandler();
 
       this.close();
     });

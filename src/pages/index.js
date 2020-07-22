@@ -83,14 +83,22 @@ Promise.all([api.getDefaultUserInfo(), api.getInitialCards()]).then((data) => {
                   console.log(err);
                 });
             },
-
-            // deleteCards: () => {
-            //   popupCardDelete.open();
-            //   popupCardDelete.handleButtonDeleteCard(data, function () {
-            //     api.deleteCard(data._id);
-            //   })
-            // },
+          },
+          {
+            handleCardDelete: () => {
+              popupCardDelete.open();
+              // popupCardDelete.handleButtonDeleteCard(data, function () {
+              //   api.deleteCard(data._id);
+              // });
+            },
           }
+
+          // deleteCards: () => {
+          //   popupCardDelete.open();
+          //   popupCardDelete.handleButtonDeleteCard(data, function () {
+          //     api.deleteCard(data._id);
+          //   })
+          // },
         );
         const cardElement = card.generateCard();
 
@@ -112,6 +120,30 @@ Promise.all([api.getDefaultUserInfo(), api.getInitialCards()]).then((data) => {
         {
           handleCardClick: () => {
             popupImage.open(data);
+          },
+        },
+        {
+          handleCardLike: (id) => {
+            api
+              .likeCards(id)
+              .then((data) => {
+                return data.likes.length;
+              })
+              .catch((err) => {
+                console.log(err);
+              });
+          },
+        },
+        {
+          handleCardDislike: (id) => {
+            api
+              .disLikeCards(id)
+              .then((data) => {
+                return data.likes.length;
+              })
+              .catch((err) => {
+                console.log(err);
+              });
           },
         }
 
@@ -166,10 +198,10 @@ Promise.all([api.getDefaultUserInfo(), api.getInitialCards()]).then((data) => {
 });
 
 //подтверждение удаления
-// const popupCardDelete = new PopupWithDelete('.popup_confirm', {
-//   formSubmitHandler: () => {},
-// });
-// popupCardDelete.setEventListeners();
+const popupCardDelete = new PopupWithDelete('.popup_confirm', {
+  formSubmitHandler: () => {},
+});
+popupCardDelete.setEventListeners();
 
 //popup with image
 const popupImage = new PopupWithImage('.popup__preview');

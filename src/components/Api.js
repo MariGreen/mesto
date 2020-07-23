@@ -81,7 +81,6 @@ class Api {
   }
 
   deleteCard(cardId) {
-    //console.log(cardId);
     return fetch(`${this.baseUrl}/cards/${cardId}`, {
       method: 'DELETE',
       headers: this.headers,

@@ -1,7 +1,7 @@
 export class UserInfo {
-  constructor(name, vocation, avatar) {
+  constructor(name, about, avatar) {
     this._name = document.querySelector(name);
-    this._vocation = document.querySelector(vocation);
+    this._about = document.querySelector(about);
     this._avatar = document.querySelector(avatar);
   }
 
@@ -10,7 +10,7 @@ export class UserInfo {
     api
       .then((data) => {
         person.name = data.name;
-        person.vocation = data.about;
+        person.about = data.about;
         person._id = data._id;
         person.avatar = data.avatar;
         return person;
@@ -22,7 +22,7 @@ export class UserInfo {
 
   setUserInfo(person) {
     this._name.textContent = person.name;
-    this._vocation.textContent = person.about;
+    this._about.textContent = person.about;
     this._avatar.src = person.avatar;
   }
 }

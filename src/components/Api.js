@@ -4,30 +4,36 @@ class Api {
     this.headers = headers;
   }
 
+  _handleResponse(res) {
+    if (res.ok) {
+      return res.json();
+    } else {
+      console.log('Ошибка при обработке запроса');
+      return Promise.reject(`Ошибка: ${res.status}`);
+    }
+  }
+
+  _handleResponseError(err) {
+    console.log('Ничего не получилось');
+    return Promise.reject(err.message);
+  }
+
   getDefaultUserInfo() {
     return fetch(`${this.baseUrl}/users/me`, {
       method: 'GET',
       headers: this.headers,
-    }).then((res) => {
-      if (res.ok) {
-        return res.json();
-      }
-      // если ошибка, отклоняем промис
-      return Promise.reject(`Ошибка: ${res.status}`);
-    });
+    })
+      .then(this._handleResponse)
+      .catch(this._handleResponseError);
   }
 
   getInitialCards() {
     return fetch(`${this.baseUrl}/cards`, {
       method: 'GET',
       headers: this.headers,
-    }).then((res) => {
-      if (res.ok) {
-        return res.json();
-      }
-      // если ошибка, отклоняем промис
-      return Promise.reject(`Ошибка: ${res.status}`);
-    });
+    })
+      .then(this._handleResponse)
+      .catch(this._handleResponseError);
   }
 
   createCard(data) {
@@ -38,13 +44,9 @@ class Api {
         name: data.name,
         link: data.link,
       }),
-    }).then((res) => {
-      if (res.ok) {
-        return res.json();
-      }
-      // если ошибка, отклоняем промис
-      return Promise.reject(`Ошибка: ${res.status}`);
-    });
+    })
+      .then(this._handleResponse)
+      .catch(this._handleResponseError);
   }
 
   editUser(data) {
@@ -55,52 +57,37 @@ class Api {
         name: data.name,
         about: data.vocation,
       }),
-    }).then((res) => {
-      if (res.ok) {
-        return res.json();
-      }
-      // если ошибка, отклоняем промис
-      return Promise.reject(`Ошибка: ${res.status}`);
-    });
+    })
+      .then(this._handleResponse)
+      .catch(this._handleResponseError);
   }
 
   likeCards(data) {
     return fetch(`${this.baseUrl}/cards/likes/${data}`, {
       method: 'PUT',
       headers: this.headers,
-    }).then((res) => {
-      if (res.ok) {
-        return res.json();
-      }
-      // если ошибка, отклоняем промис
-      return Promise.reject(`Ошибка: ${res.status}`);
-    });
+    })
+      .then(this._handleResponse)
+      .catch(this._handleResponseError);
   }
 
   disLikeCards(data) {
     return fetch(`${this.baseUrl}/cards/likes/${data}`, {
       method: 'DELETE',
       headers: this.headers,
-    }).then((res) => {
-      if (res.ok) {
-        return res.json();
-      }
-      // если ошибка, отклоняем промис
-      return Promise.reject(`Ошибка: ${res.status}`);
-    });
+    })
+      .then(this._handleResponse)
+      .catch(this._handleResponseError);
   }
 
   deleteCard(cardId) {
+    //console.log(cardId);
     return fetch(`${this.baseUrl}/cards/${cardId}`, {
-      headers: this.headers,
       method: 'DELETE',
-    }).then((res) => {
-      if (res.ok) {
-        return res.json();
-      }
-      // если ошибка, отклоняем промис
-      return Promise.reject(`Ошибка: ${res.status}`);
-    });
+      headers: this.headers,
+    })
+      .then(this._handleResponse)
+      .catch(this._handleResponseError);
   }
 
   updateAvatar(avatar) {
@@ -110,13 +97,9 @@ class Api {
       body: JSON.stringify({
         avatar: avatar,
       }),
-    }).then((res) => {
-      if (res.ok) {
-        return res.json();
-      }
-      // если ошибка, отклоняем промис
-      return Promise.reject(`Ошибка: ${res.status}`);
-    });
+    })
+      .then(this._handleResponse)
+      .catch(this._handleResponseError);
   }
 }
 

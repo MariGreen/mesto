@@ -5,17 +5,21 @@ export class PopupWithDelete extends Popup {
     super(popupSelector);
     this._formSubmitHandler = formSubmitHandler;
     this._closeButton = this._popupSelector.querySelector('.popup__delete-button');
+
+    this.card = {};
   }
 
-  //_deleteButtonHandler()
+  open(card) {
+    super.open();
+    this.card = card;
+  }
 
   setEventListeners() {
     super.setEventListeners();
     this._popupSelector.addEventListener('submit', (evt) => {
       evt.preventDefault();
 
-      //this._formSubmitHandler(this._getInputValues());
-      this._formSubmitHandler();
+      this._formSubmitHandler(this.card);
 
       this.close();
     });

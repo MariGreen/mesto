@@ -7,15 +7,16 @@
   color: red;
   position: absolute;
   left: 0;
-  top: 34px;
+  top: -20px;
   display: block;
   overflow: hidden;
   text-overflow: ellipsis;
 }
 
-@media screen and (max-width: 804px) {
+@media screen and (max-width: 450px) {
   .popup__form-item_error {
     font-size: 8px;
     line-height: 1.25;
+    top: 0;
   }
 }

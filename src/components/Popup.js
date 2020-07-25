@@ -14,13 +14,13 @@ export class Popup {
   }
 
   _handleEscClose = (evt) => {
-    if (evt.key == 'Escape') {
+    if (evt.key === 'Escape') {
       this.close();
     }
   };
 
   _closeByOverlayClick = (evt) => {
-    if (evt.target == this._popupSelector) {
+    if (evt.target === this._popupSelector) {
       this.close();
     }
   };

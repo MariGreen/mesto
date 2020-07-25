@@ -93,7 +93,7 @@ class Card {
   }
 
   _myCards = () => {
-    if (this._owner._id != this._userId) {
+    if (this._owner._id !== this._userId) {
       this._trashButton.style.display = 'none';
     }
   };

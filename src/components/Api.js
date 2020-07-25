@@ -13,27 +13,18 @@ class Api {
     }
   }
 
-  _handleResponseError(err) {
-    console.log('Ничего не получилось');
-    return Promise.reject(err.message);
-  }
-
   getDefaultUserInfo() {
     return fetch(`${this.baseUrl}/users/me`, {
       method: 'GET',
       headers: this.headers,
-    })
-      .then(this._handleResponse)
-      .catch(this._handleResponseError);
+    }).then(this._handleResponse);
   }
 
   getInitialCards() {
     return fetch(`${this.baseUrl}/cards`, {
       method: 'GET',
       headers: this.headers,
-    })
-      .then(this._handleResponse)
-      .catch(this._handleResponseError);
+    }).then(this._handleResponse);
   }
 
   createCard(data) {
@@ -44,9 +35,7 @@ class Api {
         name: data.name,
         link: data.link,
       }),
-    })
-      .then(this._handleResponse)
-      .catch(this._handleResponseError);
+    }).then(this._handleResponse);
   }
 
   editUser(data) {
@@ -57,36 +46,28 @@ class Api {
         name: data.name,
         about: data.vocation,
       }),
-    })
-      .then(this._handleResponse)
-      .catch(this._handleResponseError);
+    }).then(this._handleResponse);
   }
 
   likeCards(data) {
     return fetch(`${this.baseUrl}/cards/likes/${data}`, {
       method: 'PUT',
       headers: this.headers,
-    })
-      .then(this._handleResponse)
-      .catch(this._handleResponseError);
+    }).then(this._handleResponse);
   }
 
   disLikeCards(data) {
     return fetch(`${this.baseUrl}/cards/likes/${data}`, {
       method: 'DELETE',
       headers: this.headers,
-    })
-      .then(this._handleResponse)
-      .catch(this._handleResponseError);
+    }).then(this._handleResponse);
   }
 
   deleteCard(cardId) {
     return fetch(`${this.baseUrl}/cards/${cardId}`, {
       method: 'DELETE',
       headers: this.headers,
-    })
-      .then(this._handleResponse)
-      .catch(this._handleResponseError);
+    }).then(this._handleResponse);
   }
 
   updateAvatar(avatar) {
@@ -96,9 +77,7 @@ class Api {
       body: JSON.stringify({
         avatar: avatar,
       }),
-    })
-      .then(this._handleResponse)
-      .catch(this._handleResponseError);
+    }).then(this._handleResponse);
   }
 }
 

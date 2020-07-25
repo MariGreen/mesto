@@ -6,8 +6,12 @@ import {
   popupAvatar,
   popupProfileName,
   popupProfileVocation,
+  saveButtonProfile,
+  confirmButton,
+  saveButtonAvatar,
+  saveButtonPlace,
   obj,
-} from '../components/constants.js';
+} from '../utils/constants.js';
 import { Card } from '../components/Card.js';
 import { FormValidator } from '../components/FormValidator.js';
 import { Section } from '../components/Section.js';
@@ -29,8 +33,6 @@ const api = new Api({
 });
 
 const newUser = new UserInfo('.profile__name', '.profile__vocation', '.profile__avatar');
-const name = document.querySelector('.profile__name');
-const vocation = document.querySelector('.profile__vocation');
 
 Promise.all([api.getDefaultUserInfo(), api.getInitialCards()])
   .then((data) => {
@@ -95,8 +97,7 @@ Promise.all([api.getDefaultUserInfo(), api.getInitialCards()])
 
     const popupNewPlace = new PopupWithForm('.popup_place', {
       formSubmitHandler(data) {
-        const saveButton = document.querySelector('.popup_place').querySelector('.popup__save-button');
-        saveButton.textContent = 'Сохранение...';
+        saveButtonPlace.textContent = 'Сохранение...';
         api
           .createCard(data)
           .then((data) => {
@@ -119,7 +120,7 @@ Promise.all([api.getDefaultUserInfo(), api.getInitialCards()])
           })
           .finally(() => {
             popupNewPlace.close();
-            saveButton.textContent = 'Сохранить';
+            saveButtonPlace.textContent = 'Сохранить';
           });
       },
     });
@@ -130,8 +131,8 @@ Promise.all([api.getDefaultUserInfo(), api.getInitialCards()])
     const changeAvatar = new PopupWithForm('.popup_avatar', {
       formSubmitHandler(data) {
         document.querySelector('.profile__avatar').src = data.avatar;
-        const saveButton = document.querySelector('.popup_avatar').querySelector('.popup__save-button');
-        saveButton.textContent = 'Сохранение...';
+
+        saveButtonAvatar.textContent = 'Сохранение...';
         api
           .updateAvatar(data.avatar)
           .then((result) => {
@@ -142,7 +143,7 @@ Promise.all([api.getDefaultUserInfo(), api.getInitialCards()])
           })
           .finally(() => {
             changeAvatar.close();
-            saveButton.textContent = 'Сохранить';
+            saveButtonAvatar.textContent = 'Сохранить';
           });
       },
     });
@@ -163,6 +164,7 @@ Promise.all([api.getDefaultUserInfo(), api.getInitialCards()])
     //подтверждение удаления
     const popupCardDelete = new PopupWithDelete('.popup_confirm', {
       formSubmitHandler: (card) => {
+        confirmButton.textContent = 'Удаление...';
         api
           .deleteCard(card._idCard)
           .then((result) => {
@@ -170,6 +172,10 @@ Promise.all([api.getDefaultUserInfo(), api.getInitialCards()])
           })
           .catch((err) => {
             console.log(err);
+          })
+          .finally(() => {
+            popupCardDelete.close();
+            confirmButton.textContent = 'Да';
           });
       },
     });
@@ -186,8 +192,7 @@ popupImage.setEventListeners();
 //user
 const newPopupProfile = new PopupWithForm('.popup_profile', {
   formSubmitHandler(person) {
-    const saveButton = document.querySelector('.popup_profile').querySelector('.popup__save-button');
-    saveButton.textContent = 'Сохранение...';
+    saveButtonProfile.textContent = 'Сохранение...';
     api
       .editUser(person)
       .then((result) => {
@@ -198,7 +203,7 @@ const newPopupProfile = new PopupWithForm('.popup_profile', {
       })
       .finally(() => {
         newPopupProfile.close();
-        saveButton.textContent = 'Сохранить';
+        saveButtonProfile.textContent = 'Сохранить';
       });
   },
 });
@@ -211,8 +216,9 @@ validatorProfile.enableValidation();
 
 //редактирование профиля
 editUser.addEventListener('click', () => {
-  popupProfileName.value = name.textContent;
-  popupProfileVocation.value = vocation.textContent;
+  const currentUserInfo = newUser.getUserInfo();
+  popupProfileName.value = currentUserInfo.name;
+  popupProfileVocation.value = currentUserInfo.about;
   validatorProfile.makeClear();
   newPopupProfile.open();
 });

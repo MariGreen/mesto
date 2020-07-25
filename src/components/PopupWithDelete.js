@@ -20,8 +20,6 @@ export class PopupWithDelete extends Popup {
       evt.preventDefault();
 
       this._formSubmitHandler(this.card);
-
-      this.close();
     });
   }
 }

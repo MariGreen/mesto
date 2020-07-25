@@ -5,19 +5,13 @@ export class UserInfo {
     this._avatar = document.querySelector(avatar);
   }
 
-  getUserInfo(api) {
-    const person = {};
-    api
-      .then((data) => {
-        person.name = data.name;
-        person.about = data.about;
-        person._id = data._id;
-        person.avatar = data.avatar;
-        return person;
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+  getUserInfo() {
+    const person = {
+      name: this._name.textContent,
+      about: this._about.textContent,
+      avatar: this._avatar.src,
+    };
+    return person;
   }
 
   setUserInfo(person) {
